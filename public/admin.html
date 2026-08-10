@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#fff6e9">
+  <title>Cix Makarna · Yönetim</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+    :root{--accent:#c96545;--gold:#d3a34f;--ink:#3d302a;--cream:#fff6e9;--paper:#fffdf8;--line:#e8d7c5;--muted:#7d6f66;--green:#557b52;--shadow:0 10px 30px #6c493114}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}
+    .login{position:fixed;inset:0;z-index:100;background:linear-gradient(145deg,#f9e7d1,#f4d3bd);display:grid;place-items:center;padding:20px}.login-card{width:min(100%,400px);background:#fffdf9;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 25px 80px #7446322b}.login-mark{width:48px;height:5px;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--gold));margin-bottom:18px}.login h1{font:700 42px/1 'Barlow Condensed';margin:0}.login p{color:var(--muted);font-size:13px}.login input{width:100%;margin:10px 0 12px;padding:14px;border:1px solid var(--line);border-radius:11px;background:#fff}
+    .btn{border:1px solid var(--line);background:#f6e5d0;color:var(--ink);font-weight:700;border-radius:10px;padding:10px 14px;transition:.18s}.btn:hover{filter:saturate(1.1);transform:translateY(-1px)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn.green{background:var(--green);border-color:var(--green);color:#fff}.btn.ghost{background:#fff}.btn.danger{background:#fff0ec;color:#a73e2f;border-color:#efc8be}.btn.full{width:100%}
+    .layout{display:grid;grid-template-columns:235px 1fr;min-height:100vh}.side{position:sticky;top:0;height:100vh;padding:24px 16px;background:#f1dfca;border-right:1px solid #dfc9b3}.brand{margin:5px 10px 26px}.brand b{display:block;font:700 29px/1 'Barlow Condensed';color:#9b4c38}.brand small{font-size:10px;color:#846f61;letter-spacing:.1em;text-transform:uppercase}.nav{display:flex;align-items:center;width:100%;border:0;background:transparent;color:#705e53;padding:12px 13px;border-radius:11px;font-weight:700;text-align:left;margin:4px 0}.nav.on{background:#fff9f1;color:var(--accent);box-shadow:0 5px 16px #80523413}.nav:last-child{margin-top:20px;border:1px solid #ddc6af}
+    .main{min-width:0;padding:28px}.top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:22px}.top h1{font:700 42px/1 'Barlow Condensed';margin:0}.top small{color:var(--muted);font-size:11px}.page{display:none}.page.on{display:block}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.stat{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:var(--shadow);color:var(--muted);font-size:12px}.stat b{display:block;font:700 30px/1 'Barlow Condensed';color:var(--accent);margin-bottom:3px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}.toolbar input,.toolbar select{padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:190px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px}.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.card.off img,.card.off .cb{opacity:.45;filter:grayscale(.35)}.card img{width:100%;height:160px;object-fit:cover;background:#f0e4d8;transition:.2s}.cb{padding:14px;transition:.2s}.cb h3{font-size:14px;line-height:1.3;margin:0 0 6px}.cb p{height:34px;overflow:hidden;color:var(--muted);font-size:11px;line-height:1.5}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.price{font:700 24px 'Barlow Condensed';color:var(--accent)}.actions{display:flex;gap:5px}.mini{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 7px;color:#69584e;font-size:10px;font-weight:700}.mini.danger{color:#a13f31;background:#fff2ef}.visibility-toggle{position:absolute;z-index:4;top:10px;right:10px;display:flex;align-items:center;gap:7px;border:1px solid #d9cabb;border-radius:999px;padding:6px 9px 6px 7px;background:#fffaf4e8;color:#8a554d;font-size:10px;font-weight:800;box-shadow:0 5px 15px #4e31231f;backdrop-filter:blur(8px)}.switch-track{position:relative;width:28px;height:16px;border-radius:999px;background:#c9bcb3;transition:.2s}.switch-track i{position:absolute;top:3px;left:3px;width:10px;height:10px;border-radius:50%;background:#fff;transition:.2s}.visibility-toggle.on{color:#376341;border-color:#b8cbb8}.visibility-toggle.on .switch-track{background:#5c8a62}.visibility-toggle.on .switch-track i{transform:translateX(12px)}
+    .panel{max-width:920px;background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:22px;box-shadow:var(--shadow)}.panel h2{font:700 28px 'Barlow Condensed';margin:0 0 16px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:700;color:#68584f}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px;background:#fff;color:var(--ink)}.field textarea{min-height:92px;resize:vertical}.help{font-size:10px;color:var(--muted);line-height:1.45}.checks{display:flex;gap:18px;align-items:center;min-height:44px}.checks label{display:flex;align-items:center;gap:7px}.preview{width:100%;height:190px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#f4e9dd}.preview.logo{object-fit:contain;background:#f8e7ce;padding:14px}.upload-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.file{position:absolute;opacity:0;pointer-events:none}
+    .catrow{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);background:#fff;border-radius:11px;margin:8px 0}.catnum{width:31px;height:31px;display:grid;place-items:center;border-radius:8px;background:#f5e4d0;color:var(--accent);font-weight:700}.catrow input{border:0;border-bottom:1px solid transparent;padding:8px;background:transparent;font-weight:700;color:var(--ink);min-width:0}.catrow input:focus{outline:0;border-bottom-color:var(--accent)}
+    .qr{text-align:center}.qrbox{width:300px;max-width:100%;margin:18px auto;background:#fff;border:1px solid var(--line);border-radius:17px;padding:18px}.qrbox img,.qrbox canvas{max-width:100%}.qrurl{font-size:11px;color:var(--muted);word-break:break-all}
+    .dialog{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:18px;background:#4935289c;backdrop-filter:blur(5px)}.dialog.on{display:grid}.dialog-card{width:min(100%,680px);max-height:93vh;overflow:auto;background:var(--cream);border:1px solid #e2ccb9;border-radius:20px;padding:22px;box-shadow:0 25px 90px #321b1260}.dialog h2{font:700 32px 'Barlow Condensed';margin:0 0 16px}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.toast{position:fixed;right:18px;bottom:18px;z-index:120;display:none;max-width:360px;background:var(--ink);color:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 12px 35px #0003;font-size:12px}.toast.on{display:block}
+    .asset-card{padding:13px;border:1px solid var(--line);border-radius:13px;background:#fffaf3}.asset-card h3{font-size:13px;margin:0 0 10px}.section-title{grid-column:1/-1;margin:8px 0 -3px;padding-top:10px;border-top:1px solid var(--line);font:700 21px 'Barlow Condensed';color:#6e5549}
+    @media(max-width:780px){.layout{display:block}.side{position:relative;height:auto;display:flex;gap:5px;overflow:auto;padding:9px}.brand{display:none}.nav{width:auto;white-space:nowrap;margin:0}.nav:last-child{margin:0}.main{padding:18px 12px}.top h1{font-size:35px}.stats{grid-template-columns:repeat(3,1fr)}.formgrid{grid-template-columns:1fr}.field.full,.section-title{grid-column:auto}.grid{grid-template-columns:1fr 1fr}.card img{height:135px}.catrow{grid-template-columns:36px 1fr}.catrow .actions{grid-column:2}.top{align-items:flex-start}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}.stats{gap:7px}.stat{padding:12px}.toolbar input,.toolbar select{width:100%;min-width:0}.top small{display:block;max-width:240px}.card{display:grid;grid-template-columns:112px 1fr}.card img{height:100%;min-height:145px}.actions{flex-wrap:wrap}.preview{height:165px}}
+  </style>
+</head>
+<body>
+  <div class="login" id="login">
+    <div class="login-card">
+      <div class="login-mark"></div>
+      <h1>CIX YÖNETİM</h1>
+      <p>Menü, görseller ve işletme bilgileri</p>
+      <input id="pass" type="password" placeholder="Admin şifresi" autocomplete="current-password">
+      <button class="btn primary full" onclick="doLogin()">Giriş Yap</button>
+      <div class="help" style="margin-top:10px">Yerel önizleme şifresi: 0000</div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="side">
+      <div class="brand"><b>CIX YÖNETİM</b><small>QR Menü Kontrolü</small></div>
+      <button class="nav on" data-page="products">Ürünler</button>
+      <button class="nav" data-page="categories">Kategoriler</button>
+      <button class="nav" data-page="settings">İşletme ve Tasarım</button>
+      <button class="nav" data-page="qr">QR Kod</button>
+      <button class="nav" onclick="window.open('index.html','_blank')">Menüyü Gör</button>
+    </aside>
+
+    <main class="main">
+      <div class="top">
+        <div><h1 id="pageTitle">ÜRÜNLER</h1><small>Yaptığınız değişiklikler menüye kaydedilir.</small></div>
+        <button class="btn primary" id="addBtn" onclick="openItem()">Yeni Ürün</button>
+      </div>
+
+      <section class="page on" id="products">
+        <div class="stats">
+          <div class="stat"><b id="statItems">0</b>Ürün</div>
+          <div class="stat"><b id="statCats">0</b>Kategori</div>
+          <div class="stat"><b id="statHidden">0</b>Gizli</div>
+        </div>
+        <div class="toolbar"><input id="find" placeholder="Ürün ara..."><select id="filter"></select></div>
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <section class="page" id="categories">
+        <div class="panel">
+          <h2>KATEGORİLER</h2>
+          <p class="help">Kategori adını doğrudan kutudan değiştirebilir, sırasını düzenleyebilirsiniz.</p>
+          <div id="catList"></div>
+          <div class="toolbar" style="margin-top:16px"><input id="newCat" placeholder="Yeni kategori adı"><button class="btn primary" onclick="addCategory()">Kategori Ekle</button></div>
+        </div>
+      </section>
+
+      <section class="page" id="settings">
+        <div class="panel">
+          <h2>İŞLETME VE TASARIM</h2>
+          <div class="formgrid" id="settingsForm"></div>
+          <button class="btn primary" style="margin-top:18px" onclick="saveSettings()">Tüm Değişiklikleri Kaydet</button>
+        </div>
+      </section>
+
+      <section class="page" id="qr">
+        <div class="panel qr">
+          <h2>QR MENÜ KODU</h2>
+          <p class="help">Masa, paket ve broşürlerde kullanmak için.</p>
+          <div class="qrbox" id="qrBox"></div>
+          <div class="qrurl" id="qrUrl"></div>
+          <div style="margin-top:18px"><button class="btn" onclick="downloadQR()">PNG İndir</button> <button class="btn primary" onclick="printQR()">Yazdır</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="dialog" id="itemDialog">
+    <div class="dialog-card">
+      <h2 id="dialogTitle">ÜRÜN</h2>
+      <div class="formgrid">
+        <div class="field"><label>Ürün Adı</label><input id="itemName"></div>
+        <div class="field"><label>Kategori</label><select id="itemCat"></select></div>
+        <div class="field"><label>Fiyat</label><input id="itemPrice" type="number" min="0" step="1"></div>
+        <div class="field"><label>Görsel dosya yolu</label><input id="itemPath" placeholder="images/urun.jpg"></div>
+        <div class="field full asset-card">
+          <h3>Ürün Görseli</h3>
+          <img class="preview" id="itemPreview" alt="Ürün görseli önizleme">
+          <input type="hidden" id="itemImg">
+          <input class="file" id="itemFile" type="file" accept="image/jpeg,image/png,image/webp">
+          <div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('itemFile').click()">Bilgisayardan Görsel Seç</button><span class="help" id="itemFileNote">JPG, PNG veya WebP</span></div>
+        </div>
+        <div class="field full"><label>Açıklama</label><textarea id="itemDesc"></textarea></div>
+        <div class="field"><label>Etiketler (virgülle ayırın)</label><input id="itemTags"></div>
+        <div class="field checks"><label><input id="itemPopular" type="checkbox"> Popüler ürün</label><label><input id="itemHidden" type="checkbox"> Ürünü gizle</label></div>
+      </div>
+      <div class="dialog-actions"><button class="btn ghost" onclick="closeItem()">Vazgeç</button><button class="btn primary" onclick="saveItem()">Kaydet</button></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="qrcode.min.js"></script>
+  <script src="data.js"></script>
+  <script>
+    let DATA, editing = null, settingsAssets = {};
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const attr = esc;
+
+    function notify(message){
+      $('toast').textContent = message;
+      $('toast').classList.add('on');
+      clearTimeout(notify.timer);
+      notify.timer = setTimeout(()=>$('toast').classList.remove('on'),2600);
+    }
+
+    async function doLogin(){
+      const password = $('pass').value;
+      const local = location.protocol === 'file:' || ['localhost','127.0.0.1'].includes(location.hostname);
+      if(local){
+        if(password !== '0000') return notify('Şifre hatalı');
+        sessionStorage.setItem('cix_pass',password);
+        $('login').style.display='none';
+        return;
+      }
+      try{
+        const response = await fetch('/api/menu?verify=1',{method:'POST',headers:{'X-Admin-Password':password}});
+        if(!response.ok) return notify('Şifre hatalı');
+        sessionStorage.setItem('cix_pass',password);
+        $('login').style.display='none';
+      }catch{ notify('Sunucuya ulaşılamadı'); }
+    }
+
+    async function persist(message='Kaydedildi'){
+      try{ saveLocal(DATA); }
+      catch{ return notify('Görseller tarayıcı depolama alanını aştı. Daha küçük dosya deneyin.'); }
+      if(location.protocol.startsWith('http') && !['localhost','127.0.0.1'].includes(location.hostname)){
+        try{
+          const response = await fetch('/api/menu',{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Password':sessionStorage.getItem('cix_pass')||''},body:JSON.stringify(DATA)});
+          if(!response.ok) throw new Error();
+          message += ' ve yayına alındı';
+        }catch{ message += ' (yalnızca bu cihazda)'; }
+      }
+      renderAll();
+      notify(message);
+    }
+
+    function renderAll(){
+      $('statItems').textContent=DATA.items.length;
+      $('statCats').textContent=DATA.categories.length;
+      $('statHidden').textContent=DATA.items.filter(x=>x.hidden).length;
+      const selected=$('filter').value;
+      $('filter').innerHTML='<option value="">Tüm kategoriler</option>'+DATA.categories.map(c=>`<option value="${attr(c.id)}">${esc(c.name)}</option>`).join('');
+      $('filter').value=selected;
+      $('itemCat').innerHTML=DATA.categories.map(c=>`<option value="${attr(c.id)}">${esc(c.name)}</option>`).join('');
+      renderGrid();
+      renderCats();
+      renderSettings();
+    }
+
+    function renderGrid(){
+      const query=$('find').value.toLocaleLowerCase('tr'), category=$('filter').value;
+      const items=DATA.items.filter(x=>(!query||`${x.name} ${x.desc}`.toLocaleLowerCase('tr').includes(query))&&(!category||x.cat===category));
+      $('grid').innerHTML=items.map(x=>`<article class="card ${x.hidden?'off':''}"><button class="visibility-toggle ${x.hidden?'':'on'}" onclick="toggleItem('${attr(x.id)}')" aria-pressed="${x.hidden?'false':'true'}" title="Ürünü menüde göster veya gizle"><span class="switch-track"><i></i></span><span>${x.hidden?'Gizli':'Aktif'}</span></button><img src="${attr(x.img)}" alt="${attr(x.name)}" loading="lazy" decoding="async" onerror="this.src='images/cix-hero.jpg'"><div class="cb"><h3>${esc(x.name)}</h3><p>${esc(x.desc)}</p><div class="row"><b class="price">${x.price} ₺</b><div class="actions"><button class="mini" onclick="openItem('${attr(x.id)}')">Düzenle</button><button class="mini danger" onclick="deleteItem('${attr(x.id)}')">Sil</button></div></div></div></article>`).join('');
+    }
+
+    function openItem(id){
+      editing=id||null;
+      const item=id?DATA.items.find(x=>x.id===id):{name:'',cat:DATA.categories[0]?.id||'',price:'',img:'images/cix-hero.jpg',desc:'',tags:[],popular:false,hidden:false};
+      $('dialogTitle').textContent=id?'ÜRÜNÜ DÜZENLE':'YENİ ÜRÜN';
+      $('itemName').value=item.name;$('itemCat').value=item.cat;$('itemPrice').value=item.price;
+      $('itemImg').value=item.img;$('itemPath').value=String(item.img).startsWith('data:')?'':item.img;
+      $('itemPreview').src=item.img;$('itemDesc').value=item.desc;$('itemTags').value=(item.tags||[]).join(', ');
+      $('itemPopular').checked=!!item.popular;$('itemHidden').checked=!!item.hidden;
+      $('itemFile').value='';$('itemFileNote').textContent=String(item.img).startsWith('data:')?'Yüklenmiş görsel kullanılıyor':'JPG, PNG veya WebP';
+      $('itemDialog').classList.add('on');
+    }
+    function closeItem(){$('itemDialog').classList.remove('on')}
+
+    function saveItem(){
+      if(!$('itemName').value.trim()||!$('itemPrice').value) return notify('Ürün adı ve fiyat gerekli');
+      const image=$('itemImg').value||$('itemPath').value.trim()||'images/cix-hero.jpg';
+      const item=editing?DATA.items.find(x=>x.id===editing):{id:'u'+Date.now()};
+      Object.assign(item,{name:$('itemName').value.trim(),cat:$('itemCat').value,price:Number($('itemPrice').value),img:image,desc:$('itemDesc').value.trim(),tags:$('itemTags').value.split(',').map(x=>x.trim()).filter(Boolean),popular:$('itemPopular').checked,hidden:$('itemHidden').checked});
+      if(!editing) DATA.items.push(item);
+      closeItem();persist('Ürün kaydedildi');
+    }
+    function toggleItem(id){const item=DATA.items.find(x=>x.id===id);item.hidden=!item.hidden;persist(item.hidden?'Ürün gizlendi':'Ürün gösterildi')}
+    function deleteItem(id){if(confirm('Bu ürün silinsin mi?')){DATA.items=DATA.items.filter(x=>x.id!==id);persist('Ürün silindi')}}
+
+    function renderCats(){
+      $('catList').innerHTML=DATA.categories.map((c,i)=>`<div class="catrow"><span class="catnum">${i+1}</span><input value="${attr(c.name)}" onchange="renameCategory('${attr(c.id)}',this.value)"><div class="actions"><button class="mini" onclick="moveCategory(${i},-1)">Yukarı</button><button class="mini" onclick="moveCategory(${i},1)">Aşağı</button><button class="mini danger" onclick="deleteCategory('${attr(c.id)}')">Sil</button></div></div>`).join('');
+    }
+    function renameCategory(id,name){const category=DATA.categories.find(c=>c.id===id);if(name.trim()){category.name=name.trim();persist('Kategori adı değişti')}}
+    function moveCategory(index,direction){const target=index+direction;if(target<0||target>=DATA.categories.length)return;[DATA.categories[index],DATA.categories[target]]=[DATA.categories[target],DATA.categories[index]];persist('Kategori sırası değişti')}
+    function addCategory(){const name=$('newCat').value.trim();if(!name)return;DATA.categories.push({id:'k'+Date.now(),name});$('newCat').value='';persist('Kategori eklendi')}
+    function deleteCategory(id){if(DATA.items.some(x=>x.cat===id))return notify('Önce bu kategorideki ürünleri taşıyın veya silin');if(confirm('Kategori silinsin mi?')){DATA.categories=DATA.categories.filter(x=>x.id!==id);persist('Kategori silindi')}}
+
+    const settingFields=[
+      ['name','İşletme adı'],['tagline','Slogan'],['phone','Telefon ve WhatsApp numarası'],['instagram','Instagram URL'],['reviewLink','Google yorum URL'],['maps','Harita URL'],['address','Adres','full'],['hours','Çalışma saatleri'],['currency','Para birimi']
+    ];
+    const colorFields=[['primary','Ana vurgu'],['secondary','Altın vurgu'],['ink','Metin'],['cream','Arka plan'],['card','Kartlar'],['green','WhatsApp'],['footer','Alt bilgi']];
+
+    function renderSettings(){
+      const r=DATA.restaurant;r.theme=r.theme||{};r.promises=r.promises||['Lezzetli','Sıcak','Doyurucu'];
+      settingsAssets={cover:r.cover,logo:r.logo||'images/cix-logo-brosur.webp'};
+      $('settingsForm').innerHTML=`
+        <div class="section-title">İşletme Bilgileri</div>
+        ${settingFields.map(([key,label,size])=>`<div class="field ${size||''}"><label>${label}</label><input data-setting="${key}" value="${attr(r[key])}"></div>`).join('')}
+        <div class="section-title">Logo Altı Mesajları</div>
+        ${r.promises.map((value,i)=>`<div class="field"><label>${i+1}. ifade</label><input data-promise="${i}" value="${attr(value)}"></div>`).join('')}
+        <div class="section-title">Görseller</div>
+        <div class="field asset-card"><h3>Kapak Arka Planı</h3><img class="preview" id="coverPreview" src="${attr(r.cover)}" alt="Kapak önizleme"><input class="file" id="coverFile" type="file" accept="image/jpeg,image/png,image/webp"><div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('coverFile').click()">Kapak Görseli Seç</button></div><label>Dosya yolu</label><input id="coverPath" value="${String(r.cover).startsWith('data:')?'':attr(r.cover)}" placeholder="images/cix-hero.jpg"></div>
+        <div class="field asset-card"><h3>Menü Logosu</h3><img class="preview logo" id="logoPreview" src="${attr(r.logo||'images/cix-logo-brosur.webp')}" alt="Logo önizleme"><input class="file" id="logoFile" type="file" accept="image/jpeg,image/png,image/webp"><div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('logoFile').click()">Logo Görseli Seç</button></div><label>Dosya yolu</label><input id="logoPath" value="${String(r.logo||'').startsWith('data:')?'':attr(r.logo||'')}" placeholder="images/cix-logo-brosur.webp"></div>
+        <div class="section-title">Renkler</div>
+        ${colorFields.map(([key,label])=>`<div class="field"><label>${label}</label><input type="color" data-color="${key}" value="${attr(r.theme[key]||colorDefault(key))}"></div>`).join('')}`;
+      $('coverFile').onchange=e=>assetFileChanged('cover',e.target.files[0]);
+      $('logoFile').onchange=e=>assetFileChanged('logo',e.target.files[0]);
+      $('coverPath').oninput=e=>{settingsAssets.cover=e.target.value;$('coverPreview').src=e.target.value};
+      $('logoPath').oninput=e=>{settingsAssets.logo=e.target.value;$('logoPreview').src=e.target.value};
+    }
+    function colorDefault(key){return({primary:'#c96545',secondary:'#d3a34f',ink:'#3d302a',cream:'#fff6e9',card:'#fffdf8',green:'#557b52',footer:'#e2eadb'})[key]}
+    function normalizeContact(value){let digits=String(value||'').replace(/\D/g,'');if(digits.startsWith('0'))digits='90'+digits.slice(1);else if(digits.length===10)digits='90'+digits;return digits}
+    function saveSettings(){
+      document.querySelectorAll('[data-setting]').forEach(input=>DATA.restaurant[input.dataset.setting]=input.value.trim());
+      DATA.restaurant.whatsapp=normalizeContact(DATA.restaurant.phone);
+      const promises=[];document.querySelectorAll('[data-promise]').forEach(input=>promises[Number(input.dataset.promise)]=input.value.trim());DATA.restaurant.promises=promises;
+      document.querySelectorAll('[data-color]').forEach(input=>DATA.restaurant.theme[input.dataset.color]=input.value);
+      DATA.restaurant.cover=settingsAssets.cover||'images/cix-hero.jpg';DATA.restaurant.logo=settingsAssets.logo||'images/cix-logo-brosur.webp';
+      persist('İşletme ve tasarım bilgileri kaydedildi');
+    }
+
+    function resizeImage(file,maxSize=1100,transparent=false){
+      return new Promise((resolve,reject)=>{
+        if(!file) return reject(new Error('Dosya seçilmedi'));
+        if(!/^image\/(jpeg|png|webp)$/.test(file.type)) return reject(new Error('Desteklenmeyen dosya türü'));
+        const reader=new FileReader();
+        reader.onerror=()=>reject(new Error('Dosya okunamadı'));
+        reader.onload=()=>{
+          const image=new Image();
+          image.onerror=()=>reject(new Error('Görsel açılamadı'));
+          image.onload=()=>{
+            const ratio=Math.min(1,maxSize/Math.max(image.naturalWidth,image.naturalHeight));
+            const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(image.naturalWidth*ratio));canvas.height=Math.max(1,Math.round(image.naturalHeight*ratio));
+            const context=canvas.getContext('2d');if(!transparent){context.fillStyle='#fff';context.fillRect(0,0,canvas.width,canvas.height)}context.drawImage(image,0,0,canvas.width,canvas.height);
+            resolve(canvas.toDataURL(transparent?'image/webp':'image/jpeg',transparent ? 0.88 : 0.82));
+          };
+          image.src=reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function productFileChanged(file){
+      if(!file)return;
+      $('itemFileNote').textContent='Görsel hazırlanıyor...';
+      try{const data=await resizeImage(file,1100,false);$('itemImg').value=data;$('itemPath').value='';$('itemPreview').src=data;$('itemFileNote').textContent='Yeni görsel hazır: '+file.name;notify('Görsel hazırlandı, Kaydet düğmesine basın');}
+      catch(error){$('itemFileNote').textContent='Görsel yüklenemedi';notify(error.message)}
+    }
+    async function assetFileChanged(kind,file){
+      if(!file)return;
+      try{const data=await resizeImage(file,kind==='logo'?900:1400,kind==='logo');settingsAssets[kind]=data;$(kind+'Preview').src=data;$(kind+'Path').value='';notify((kind==='logo'?'Logo':'Kapak')+' hazırlandı, değişiklikleri kaydedin');}
+      catch(error){notify(error.message)}
+    }
+
+    function drawQR(){
+      $('qrBox').innerHTML='';const url=location.protocol==='file:'?'https://cixmakarna.csrqrmenu.com':location.origin;$('qrUrl').textContent=url;
+      if(window.QRCode)new QRCode($('qrBox'),{text:url,width:260,height:260,colorDark:'#3d302a',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+    }
+    function downloadQR(){const canvas=$('qrBox').querySelector('canvas'),image=$('qrBox').querySelector('img');if(!canvas&&!image)return;const link=document.createElement('a');link.download='cix-makarna-qr.png';link.href=canvas?canvas.toDataURL():image.src;link.click()}
+    function printQR(){window.print()}
+
+    document.querySelectorAll('.nav[data-page]').forEach(button=>button.onclick=()=>{
+      document.querySelectorAll('.nav,.page').forEach(element=>element.classList.remove('on'));
+      button.classList.add('on');$(button.dataset.page).classList.add('on');$('pageTitle').textContent=button.textContent.toLocaleUpperCase('tr');$('addBtn').style.display=button.dataset.page==='products'?'':'none';if(button.dataset.page==='qr')drawQR();
+    });
+    $('find').oninput=$('filter').onchange=renderGrid;
+    $('pass').onkeydown=e=>{if(e.key==='Enter')doLogin()};
+    $('itemPath').oninput=e=>{if(e.target.value){$('itemImg').value=e.target.value;$('itemPreview').src=e.target.value;$('itemFileNote').textContent='Dosya yolu kullanılıyor'}};
+    $('itemFile').onchange=e=>productFileChanged(e.target.files[0]);
+    $('itemDialog').onclick=e=>{if(e.target===$('itemDialog'))closeItem()};
+    loadData().then(data=>{DATA=data;renderAll();if(sessionStorage.getItem('cix_pass'))$('login').style.display='none'});
+  </script>
+</body>
+</html>
