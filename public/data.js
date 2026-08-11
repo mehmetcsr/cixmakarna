@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
     { id:"m5",cat:"makarna",name:"Spagetti Makarna",desc:"Spagetti, seçeceğiniz malzemeler ve imza soslarımızla hazırlanır.",price:299,img:"images/spagetti.jpg",tags:["Sosunu Seç"],popular:false,hidden:false },
     { id:"m6",cat:"makarna",name:"Spagetti Makarna (Büyük Boy)",desc:"Büyük porsiyon spagetti; seçtiğiniz malzemeler ve soslarla.",price:349,img:"images/spagetti-buyuk.jpg",tags:["Büyük Boy"],popular:false,hidden:false },
     { id:"p1",cat:"pilav",name:"Tereyağlı Pilav",desc:"Tane tane, tereyağlı günlük pirinç pilavı.",price:119,img:"images/pilav.jpg",tags:[],popular:false,hidden:false },
-    { id:"p2",cat:"pilav",name:"Tereyağlı Tavuklu Pilav (Büyük Boy)",desc:"Büyük boy tane tane tereyağlı pirinç pilavı üzerinde bol tiftik tavuk.",price:149,img:"images/tavuklu-pilav.jpg",tags:["Büyük Boy","Bol Tavuk"],popular:false,hidden:false },
+    { id:"p2",cat:"pilav",name:"Tereyağlı Tavuklu Pilav (Büyük Boy)",desc:"Büyük boy tane tane tereyağlı tavuklu pirinç pilavı.",price:149,img:"images/tavuklu-pilav.jpg",tags:["Büyük Boy","Bol Tavuk"],popular:false,hidden:false },
     { id:"p3",cat:"pilav",name:"Tiftik Tavuklu Pilav",desc:"Tereyağlı pirinç pilavı üzerinde tiftik tavuk.",price:189,img:"images/pilav-buyuk.jpg",tags:["Tiftik Tavuk"],popular:true,hidden:false },
     { id:"t1",cat:"tatli",name:"Spoonful",desc:"Yoğun çikolatalı krema ve yumuşacık kekiyle kaşık kaşık mutluluk veren özel tatlımız.",price:149,img:"images/spoonful.jpg",tags:["Popüler"],popular:true,hidden:false },
     { id:"i1",cat:"icecek",name:"Ev Yapımı Limonata (30 cl.)",desc:"Katkısız, konsantresiz; taptaze gerçek limonlardan günlük sıkılır.",price:75,img:"images/limonata.jpg",tags:["Ev Yapımı"],popular:false,hidden:false },
@@ -74,7 +74,7 @@ function migrateData(data){
   data.items=Array.isArray(data.items)?data.items:structuredClone(DEFAULT_DATA.items);
   if((data._schemaVersion||1)<2){
     const bigPilav=data.items.find(x=>x.id==="p2"),tiftikPilav=data.items.find(x=>x.id==="p3");
-    if(bigPilav)Object.assign(bigPilav,{name:"Tereyağlı Tavuklu Pilav (Büyük Boy)",desc:"Büyük boy tane tane tereyağlı pirinç pilavı üzerinde bol tiftik tavuk.",img:"images/tavuklu-pilav.jpg",tags:["Büyük Boy","Bol Tavuk"]});
+    if(bigPilav)Object.assign(bigPilav,{name:"Tereyağlı Tavuklu Pilav (Büyük Boy)",desc:"Büyük boy tane tane tereyağlı tavuklu pirinç pilavı.",img:"images/tavuklu-pilav.jpg",tags:["Büyük Boy","Bol Tavuk"]});
     if(tiftikPilav)Object.assign(tiftikPilav,{name:"Tiftik Tavuklu Pilav",desc:"Tereyağlı pirinç pilavı üzerinde tiftik tavuk.",img:"images/pilav-buyuk.jpg",tags:["Tiftik Tavuk"]});
     data._schemaVersion=2;
   }
@@ -87,3 +87,4 @@ async function loadData(){
   if(location.protocol.startsWith("http")){try{const r=await fetch("/api/menu",{cache:"no-store"});const remote=await r.json();if(remote?.restaurant&&remote?.items){data=migrateData(remote);saveLocal(data)}}catch{}}
   return migrateData(data);
 }
+
