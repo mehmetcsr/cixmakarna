@@ -31,7 +31,7 @@
       <p>Menü, görseller ve işletme bilgileri</p>
       <input id="pass" type="password" placeholder="Admin şifresi" autocomplete="current-password">
       <button class="btn primary full" onclick="doLogin()">Giriş Yap</button>
-      <div class="help" style="margin-top:10px">Yerel önizleme şifresi: 0000</div>
+      <div class="help" id="loginHelp" style="margin-top:10px">Canlı yönetim şifrenizi kullanın.</div>
     </div>
   </div>
 
@@ -290,6 +290,7 @@
       button.classList.add('on');$(button.dataset.page).classList.add('on');$('pageTitle').textContent=button.textContent.toLocaleUpperCase('tr');$('addBtn').style.display=button.dataset.page==='products'?'':'none';if(button.dataset.page==='qr')drawQR();
     });
     $('find').oninput=$('filter').onchange=renderGrid;
+    $('loginHelp').textContent=(location.protocol==='file:'||['localhost','127.0.0.1'].includes(location.hostname))?'Yerel önizleme şifresi: 0000':'Canlı yönetim şifrenizi kullanın.';
     $('pass').onkeydown=e=>{if(e.key==='Enter')doLogin()};
     $('itemPath').oninput=e=>{if(e.target.value){$('itemImg').value=e.target.value;$('itemPreview').src=e.target.value;$('itemFileNote').textContent='Dosya yolu kullanılıyor'}};
     $('itemFile').onchange=e=>productFileChanged(e.target.files[0]);
@@ -298,3 +299,4 @@
   </script>
 </body>
 </html>
+
