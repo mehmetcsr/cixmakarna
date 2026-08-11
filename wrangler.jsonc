@@ -9,9 +9,5 @@
       "binding": "SAGLAM_MENU",
       "id": "22aa9ce00ecc4fc597b05d72a678b6c9"
     }
-  ],
-  "observability": {
-    "enabled": true,
-    "head_sampling_rate": 1
-  }
+  ]
 }
