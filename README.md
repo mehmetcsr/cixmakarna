@@ -5,6 +5,7 @@ Mobil QR menü ve şifreli yönetim paneli. Yerel açılış için `public/index
 - Canlı menü: https://cixmakarna.csrqrmenu.com
 - Yönetim paneli: https://cixmakarna.csrqrmenu.com/admin.html
 - GitHub: https://github.com/mehmetcsr/cixmakarna
+- Yayın durumu: Cloudflare Pages ve özel alan adı aktif
 
 ## Bilgisayarda çalıştırma
 
@@ -23,3 +24,4 @@ Cloudflare Pages ayarları:
 - Hedef alan adı: `cixmakarna.csrqrmenu.com`
 
 Canlı menü verisi KV içinde `menu_cixmakarna` anahtarında saklanır. Kod değişiklikleri GitHub bağlantısı üzerinden otomatik olarak Cloudflare Pages'e yayınlanır; admin panelinde yapılan menü değişiklikleri doğrudan KV'ye kaydedilir.
+
