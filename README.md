@@ -2,6 +2,10 @@
 
 Mobil QR menü ve şifreli yönetim paneli. Yerel açılış için `public/index.html`, yönetim için `public/admin.html` dosyasını açın.
 
+- Canlı menü: https://cixmakarna.csrqrmenu.com
+- Yönetim paneli: https://cixmakarna.csrqrmenu.com/admin.html
+- GitHub: https://github.com/mehmetcsr/cixmakarna
+
 ## Bilgisayarda çalıştırma
 
 `BASLAT.bat` dosyasına çift tıklayın. Menü ve admin paneli tarayıcıda açılır.
