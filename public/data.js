@@ -1,5 +1,5 @@
 const DEFAULT_DATA = {
-  _schemaVersion: 2,
+  _schemaVersion: 3,
   restaurant: {
     name: "CİX MAKARNA",
     tagline: "Sosunu seç, keyfini çıkar",
@@ -63,6 +63,15 @@ const DEFAULT_DATA = {
   ]
 };
 const STORAGE_KEY="cix_menu_v1";
+function normalizePrice(value,fallback=0){const price=Number(value);return Number.isFinite(price)&&price>=0?price:Number(fallback)||0}
+function ensureItemPrices(item){
+  const legacy=normalizePrice(item.price);
+  const prices=item.prices&&typeof item.prices==="object"?item.prices:{};
+  item.prices={table:normalizePrice(prices.table,legacy),package:normalizePrice(prices.package,legacy)};
+  item.price=item.prices.table;
+  return item;
+}
+function itemPrice(item,mode="table"){ensureItemPrices(item);return item.prices[mode]??item.prices.table}
 function migrateData(data){
   const defaults=DEFAULT_DATA.restaurant;
   data.restaurant={...defaults,...(data.restaurant||{})};
@@ -76,8 +85,9 @@ function migrateData(data){
     const bigPilav=data.items.find(x=>x.id==="p2"),tiftikPilav=data.items.find(x=>x.id==="p3");
     if(bigPilav)Object.assign(bigPilav,{name:"Tereyağlı Tavuklu Pilav (Büyük Boy)",desc:"Büyük boy tane tane tereyağlı tavuklu pirinç pilavı.",img:"images/tavuklu-pilav.jpg",tags:["Büyük Boy","Bol Tavuk"]});
     if(tiftikPilav)Object.assign(tiftikPilav,{name:"Tiftik Tavuklu Pilav",desc:"Tereyağlı pirinç pilavı üzerinde tiftik tavuk.",img:"images/pilav-buyuk.jpg",tags:["Tiftik Tavuk"]});
-    data._schemaVersion=2;
   }
+  data.items.forEach(ensureItemPrices);
+  data._schemaVersion=3;
   return data;
 }
 function loadLocal(){try{const data=migrateData(JSON.parse(localStorage.getItem(STORAGE_KEY))||structuredClone(DEFAULT_DATA));saveLocal(data);return data}catch{return structuredClone(DEFAULT_DATA)}}
@@ -87,4 +97,3 @@ async function loadData(){
   if(location.protocol.startsWith("http")){try{const r=await fetch("/api/menu",{cache:"no-store"});const remote=await r.json();if(remote?.restaurant&&remote?.items){data=migrateData(remote);saveLocal(data)}}catch{}}
   return migrateData(data);
 }
-
