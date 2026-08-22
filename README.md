@@ -4,7 +4,7 @@ Mobil QR menü ve şifreli yönetim paneli. Yerel açılış için `public/index
 
 - Masa menüsü: https://cixmakarna.csrqrmenu.com/masa
 - Paket menüsü: https://cixmakarna.csrqrmenu.com/paket
-- Yönetim paneli: https://cixmakarna.csrqrmenu.com/admin
+- Yönetim paneli: https://cixmakarna.csrqrmenu.com/yonetim
 - GitHub: https://github.com/mehmetcsr/cixmakarna
 - Yayın durumu: Cloudflare Pages ve özel alan adı aktif
 

@@ -120,10 +120,9 @@
   </div>
 
   <div class="toast" id="toast"></div>
-  <script src="qrcode.min.js"></script>
   <script src="data.js"></script>
   <script>
-    let DATA, editing = null, settingsAssets = {}, qrLinks = {};
+    let DATA, editing = null, settingsAssets = {}, qrLinks = {}, adminReady = false, qrLoader;
     const $ = id => document.getElementById(id);
     const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const attr = esc;
@@ -141,15 +140,26 @@
       if(local){
         if(password !== '0000') return notify('Şifre hatalı');
         sessionStorage.setItem('cix_pass',password);
+        await initializeAdmin();
         $('login').style.display='none';
         return;
       }
       try{
         const response = await fetch('/api/menu?verify=1',{method:'POST',headers:{'X-Admin-Password':password}});
         if(!response.ok) return notify('Şifre hatalı');
+        const result = await response.json();
         sessionStorage.setItem('cix_pass',password);
+        await initializeAdmin(result.menu);
         $('login').style.display='none';
       }catch{ notify('Sunucuya ulaşılamadı'); }
+    }
+
+    async function initializeAdmin(menu){
+      if(adminReady)return;
+      DATA=menu?.restaurant&&menu?.items?migrateData(menu):await loadData();
+      saveLocal(DATA);
+      renderAll();
+      adminReady=true;
     }
 
     async function persist(message='Kaydedildi'){
@@ -285,9 +295,15 @@
       catch(error){notify(error.message)}
     }
 
-    function drawQR(){
+    function ensureQRCode(){
+      if(window.QRCode)return Promise.resolve();
+      if(!qrLoader)qrLoader=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='qrcode.min.js';script.onload=resolve;script.onerror=()=>reject(new Error('QR aracı yüklenemedi'));document.head.appendChild(script)});
+      return qrLoader;
+    }
+    async function drawQR(){
+      try{await ensureQRCode()}catch(error){return notify(error.message)}
       const origin=location.protocol==='file:'?'https://cixmakarna.csrqrmenu.com':location.origin;
-      qrLinks={table:{url:origin+'/masa',box:'qrTableBox',text:'qrTableUrl',file:'cix-makarna-masa-qr.png'},package:{url:origin+'/paket',box:'qrPackageBox',text:'qrPackageUrl',file:'cix-makarna-paket-qr.png'},admin:{url:origin+'/admin',box:'qrAdminBox',text:'qrAdminUrl',file:'cix-makarna-admin-qr.png'}};
+      qrLinks={table:{url:origin+'/masa',box:'qrTableBox',text:'qrTableUrl',file:'cix-makarna-masa-qr.png'},package:{url:origin+'/paket',box:'qrPackageBox',text:'qrPackageUrl',file:'cix-makarna-paket-qr.png'},admin:{url:origin+'/yonetim',box:'qrAdminBox',text:'qrAdminUrl',file:'cix-makarna-admin-qr.png'}};
       Object.values(qrLinks).forEach(entry=>{const box=$(entry.box);box.innerHTML='';$(entry.text).textContent=entry.url;if(window.QRCode)new QRCode(box,{text:entry.url,width:240,height:240,colorDark:'#3d302a',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H})});
     }
     function downloadQR(kind){const entry=qrLinks[kind];if(!entry)return;const box=$(entry.box),canvas=box.querySelector('canvas'),image=box.querySelector('img');if(!canvas&&!image)return;const link=document.createElement('a');link.download=entry.file;link.href=canvas?canvas.toDataURL('image/png'):image.src;link.click()}
@@ -304,7 +320,14 @@
     $('itemPath').oninput=e=>{if(e.target.value){$('itemImg').value=e.target.value;$('itemPreview').src=e.target.value;$('itemFileNote').textContent='Dosya yolu kullanılıyor'}};
     $('itemFile').onchange=e=>productFileChanged(e.target.files[0]);
     $('itemDialog').onclick=e=>{if(e.target===$('itemDialog'))closeItem()};
-    loadData().then(data=>{DATA=data;renderAll();if(sessionStorage.getItem('cix_pass'))$('login').style.display='none'});
+    async function resumeAdmin(){
+      const password=sessionStorage.getItem('cix_pass');
+      if(!password)return;
+      const local=location.protocol==='file:'||['localhost','127.0.0.1'].includes(location.hostname);
+      if(local){if(password==='0000'){await initializeAdmin();$('login').style.display='none'}return}
+      try{const response=await fetch('/api/menu?verify=1',{method:'POST',headers:{'X-Admin-Password':password}});if(!response.ok)throw new Error();const result=await response.json();await initializeAdmin(result.menu);$('login').style.display='none'}catch{sessionStorage.removeItem('cix_pass')}
+    }
+    resumeAdmin();
   </script>
 </body>
 </html>

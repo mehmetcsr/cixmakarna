@@ -58,7 +58,10 @@ export async function onRequest({ request, env }) {
       const expected = saved || env.ADMIN_PASSWORD;
       if (!expected) return Response.json({ error: "Admin şifresi yapılandırılmamış" }, { status: 503, headers: cors });
       if (!(await verifySecret(sent, expected))) return Response.json({ error: "Yetkisiz" }, { status: 401, headers: cors });
-      if (url.searchParams.has("verify")) return Response.json({ ok: true }, { headers: cors });
+      if (url.searchParams.has("verify")) {
+        const menu = JSON.parse(await env.SAGLAM_MENU.get(MENU_KEY) || "{}");
+        return Response.json({ ok: true, menu }, { headers: { ...cors, "Cache-Control": "no-store" } });
+      }
       const contentLength = Number(request.headers.get("Content-Length") || 0);
       if (contentLength > MAX_BODY_BYTES) return Response.json({ error: "Menü verisi çok büyük" }, { status: 413, headers: cors });
       const body = await readBodyWithLimit(request);
