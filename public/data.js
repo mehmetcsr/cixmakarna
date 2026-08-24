@@ -1,5 +1,17 @@
+const DEFAULT_PASTA_OPTIONS=Object.freeze({
+  pastaTypes:["Penne","Dirsek","Spagetti"],
+  sauces:["K?rili Tavuk","Ac?l? Tavuk","Napoliten Sos","Kremal? Mantar Sos","Cheddar Peynirli Sos","Sosisli Sos","Kremal? Tavuk"],
+  toppings:["M?s?r","K?t?r Cips","Baharatl? Yo?urt","Zeytin","Parmesan"]
+});
+const DEFAULT_PASTA_ORDERS=Object.freeze({
+  cm1:{portions:1},cm2:{portions:1},cm3:{portions:1},cm4:{portions:1},
+  ik1:{portions:2},ik2:{portions:2},ik3:{portions:1},ik4:{portions:1},
+  m1:{portions:1,fixedType:"Penne"},m2:{portions:1,fixedType:"Penne"},
+  m3:{portions:1,fixedType:"Dirsek"},m4:{portions:1,fixedType:"Dirsek"},
+  m5:{portions:1,fixedType:"Spagetti"},m6:{portions:1,fixedType:"Spagetti"}
+});
 const DEFAULT_DATA = {
-  _schemaVersion: 4,
+  _schemaVersion: 5,
   restaurant: {
     name: "C?X MAKARNA",
     tagline: "Sosunu se?, keyfini ??kar",
@@ -14,6 +26,7 @@ const DEFAULT_DATA = {
     cover: "images/cix-hero.jpg",
     logo: "images/cix-logo-brosur.webp",
     promises: ["Lezzetli", "S?cak", "Doyurucu"],
+    orderOptions: structuredClone(DEFAULT_PASTA_OPTIONS),
     theme: { primary: "#c96545", secondary: "#d3a34f", ink: "#3d302a", cream: "#fff6e9", card: "#fffdf8", green: "#557b52", footer: "#e2eadb" }
   },
   categories: [
@@ -80,6 +93,7 @@ function ensureItemPrices(item){
   return item;
 }
 function itemPrice(item,mode="table"){ensureItemPrices(item);return item.prices[mode]??item.prices.table}
+function normalizeOptionList(value,fallback){return Array.isArray(value)&&value.some(option=>String(option).trim())?[...new Set(value.map(option=>String(option).trim()).filter(Boolean))]:[...fallback]}
 function migrateData(data){
   const schemaVersion=data._schemaVersion||1;
   const defaults=DEFAULT_DATA.restaurant;
@@ -88,6 +102,12 @@ function migrateData(data){
   if(["#b56f59","#b46f59"].includes(data.restaurant.theme.footer))data.restaurant.theme.footer=defaults.theme.footer;
   if(!data.restaurant.logo||["images/cix-logo.jpg","images/cix-logo-brosur.png"].includes(data.restaurant.logo))data.restaurant.logo=defaults.logo;
   if(!Array.isArray(data.restaurant.promises))data.restaurant.promises=[...defaults.promises];
+  const orderOptions=data.restaurant.orderOptions&&typeof data.restaurant.orderOptions==="object"?data.restaurant.orderOptions:{};
+  data.restaurant.orderOptions={
+    pastaTypes:normalizeOptionList(orderOptions.pastaTypes,DEFAULT_PASTA_OPTIONS.pastaTypes),
+    sauces:normalizeOptionList(orderOptions.sauces,DEFAULT_PASTA_OPTIONS.sauces),
+    toppings:normalizeOptionList(orderOptions.toppings,DEFAULT_PASTA_OPTIONS.toppings)
+  };
   data.categories=Array.isArray(data.categories)?data.categories:structuredClone(DEFAULT_DATA.categories);
   data.items=Array.isArray(data.items)?data.items:structuredClone(DEFAULT_DATA.items);
   if((data._schemaVersion||1)<2){
@@ -98,8 +118,17 @@ function migrateData(data){
   data.items.forEach(item=>{
     ensureItemPrices(item);
     if(schemaVersion<4&&Object.hasOwn(DEFAULT_PACKAGE_PRICES,item.id))item.prices.package=DEFAULT_PACKAGE_PRICES[item.id];
+    const savedOrder=item.pastaOrder&&typeof item.pastaOrder==="object"?item.pastaOrder:null;
+    const defaultOrder=DEFAULT_PASTA_ORDERS[item.id];
+    if(savedOrder||defaultOrder){
+      const source=savedOrder||defaultOrder;
+      item.pastaOrder={
+        portions:Math.max(0,Math.min(3,Math.trunc(Number(source.portions) || 0))),
+        fixedType:String(source.fixedType||defaultOrder?.fixedType||"").trim()
+      };
+    }
   });
-  data._schemaVersion=4;
+  data._schemaVersion=5;
   return data;
 }
 function loadLocal(){try{const data=migrateData(JSON.parse(localStorage.getItem(STORAGE_KEY))||structuredClone(DEFAULT_DATA));saveLocal(data);return data}catch{return structuredClone(DEFAULT_DATA)}}
