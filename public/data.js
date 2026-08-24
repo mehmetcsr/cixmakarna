@@ -1,5 +1,5 @@
 const DEFAULT_DATA = {
-  _schemaVersion: 3,
+  _schemaVersion: 4,
   restaurant: {
     name: "CİX MAKARNA",
     tagline: "Sosunu seç, keyfini çıkar",
@@ -62,17 +62,26 @@ const DEFAULT_DATA = {
     { id:"i13",cat:"icecek",name:"Su (50 cl.)",desc:"Pet şişe içme suyu.",price:29,img:"images/su.jpg",tags:[],popular:false,hidden:false }
   ]
 };
+const DEFAULT_PACKAGE_PRICES=Object.freeze({
+  cm1:449,cm2:399,cm3:300,cm4:250,
+  cp1:379,cp2:349,cp3:230,cp4:200,
+  ik1:500,ik2:798,ik3:450,ik4:748,
+  m1:200,m2:250,m3:200,m4:250,m5:200,m6:250,
+  p1:120,p2:180,p3:150,t1:149,
+  i1:60,i2:50,i3:50,i4:70,i5:50,i6:70,i7:50,i8:50,i9:30,i10:40,i11:25,i12:25,i13:15
+});
 const STORAGE_KEY="cix_menu_v1";
 function normalizePrice(value,fallback=0){const price=Number(value);return Number.isFinite(price)&&price>=0?price:Number(fallback)||0}
 function ensureItemPrices(item){
   const legacy=normalizePrice(item.price);
   const prices=item.prices&&typeof item.prices==="object"?item.prices:{};
-  item.prices={table:normalizePrice(prices.table,legacy),package:normalizePrice(prices.package,legacy)};
+  item.prices={table:normalizePrice(prices.table,legacy),package:normalizePrice(prices.package,DEFAULT_PACKAGE_PRICES[item.id]??legacy)};
   item.price=item.prices.table;
   return item;
 }
 function itemPrice(item,mode="table"){ensureItemPrices(item);return item.prices[mode]??item.prices.table}
 function migrateData(data){
+  const schemaVersion=data._schemaVersion||1;
   const defaults=DEFAULT_DATA.restaurant;
   data.restaurant={...defaults,...(data.restaurant||{})};
   data.restaurant.theme={...defaults.theme,...(data.restaurant.theme||{})};
@@ -86,8 +95,11 @@ function migrateData(data){
     if(bigPilav)Object.assign(bigPilav,{name:"Tereyağlı Tavuklu Pilav (Büyük Boy)",desc:"Büyük boy tane tane tereyağlı tavuklu pirinç pilavı.",img:"images/tavuklu-pilav.jpg",tags:["Büyük Boy","Bol Tavuk"]});
     if(tiftikPilav)Object.assign(tiftikPilav,{name:"Tiftik Tavuklu Pilav",desc:"Tereyağlı pirinç pilavı üzerinde tiftik tavuk.",img:"images/pilav-buyuk.jpg",tags:["Tiftik Tavuk"]});
   }
-  data.items.forEach(ensureItemPrices);
-  data._schemaVersion=3;
+  data.items.forEach(item=>{
+    ensureItemPrices(item);
+    if(schemaVersion<4&&Object.hasOwn(DEFAULT_PACKAGE_PRICES,item.id))item.prices.package=DEFAULT_PACKAGE_PRICES[item.id];
+  });
+  data._schemaVersion=4;
   return data;
 }
 function loadLocal(){try{const data=migrateData(JSON.parse(localStorage.getItem(STORAGE_KEY))||structuredClone(DEFAULT_DATA));saveLocal(data);return data}catch{return structuredClone(DEFAULT_DATA)}}
