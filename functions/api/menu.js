@@ -44,13 +44,17 @@ export async function onRequest({ request, env }) {
     "Access-Control-Allow-Origin": url.origin,
     "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type,X-Admin-Password",
+    "Access-Control-Max-Age": "86400",
+    "Cache-Control": "no-store",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
     "Vary": "Origin"
   };
-  if (request.method === "OPTIONS") return new Response(null, { headers: cors });
+  if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
   try {
     if (request.method === "GET") {
       const data = await env.SAGLAM_MENU.get(MENU_KEY) || "{}";
-      return new Response(data, { headers: { ...cors, "Content-Type": "application/json", "Cache-Control": "no-store" } });
+      return new Response(data, { headers: { ...cors, "Content-Type": "application/json" } });
     }
     if (request.method === "POST") {
       const sent = request.headers.get("X-Admin-Password") || "";
@@ -77,7 +81,7 @@ export async function onRequest({ request, env }) {
       await env.SAGLAM_MENU.put(MENU_KEY, body);
       return Response.json({ ok: true }, { headers: cors });
     }
-    return new Response("Method not allowed", { status: 405, headers: cors });
+    return new Response("Method not allowed", { status: 405, headers: { ...cors, "Allow": "GET, POST, OPTIONS" } });
   } catch (error) {
     if (error instanceof RangeError && error.message === "PAYLOAD_TOO_LARGE") {
       return Response.json({ error: "Menü verisi çok büyük" }, { status: 413, headers: cors });

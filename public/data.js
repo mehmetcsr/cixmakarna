@@ -11,12 +11,12 @@ const DEFAULT_PASTA_ORDERS=Object.freeze({
   m5:{portions:1,fixedType:"Spagetti"},m6:{portions:1,fixedType:"Spagetti"}
 });
 const DEFAULT_DATA = {
-  _schemaVersion: 5,
+  _schemaVersion: 6,
   restaurant: {
     name: "CİX MAKARNA",
     tagline: "Sosunu seç, keyfini çıkar",
-    phone: "+90 535 742 22 02",
-    whatsapp: "905357422202",
+    phone: "+90 530 727 66 80",
+    whatsapp: "905307276680",
     instagram: "https://instagram.com/cix.makarna",
     maps: "https://www.google.com/maps/search/?api=1&query=Cix+Makarna+Oru%C3%A7reis+Esenler",
     reviewLink: "https://www.google.com/search?q=Cix+Makarna+Esenler+yorum",
@@ -99,6 +99,10 @@ function migrateData(data){
   const defaults=DEFAULT_DATA.restaurant;
   data.restaurant={...defaults,...(data.restaurant||{})};
   data.restaurant.theme={...defaults.theme,...(data.restaurant.theme||{})};
+  if(schemaVersion<6){
+    data.restaurant.phone=defaults.phone;
+    data.restaurant.whatsapp=defaults.whatsapp;
+  }
   if(["#b56f59","#b46f59"].includes(data.restaurant.theme.footer))data.restaurant.theme.footer=defaults.theme.footer;
   if(!data.restaurant.logo||["images/cix-logo.jpg","images/cix-logo-brosur.png"].includes(data.restaurant.logo))data.restaurant.logo=defaults.logo;
   if(!Array.isArray(data.restaurant.promises))data.restaurant.promises=[...defaults.promises];
@@ -128,7 +132,7 @@ function migrateData(data){
       };
     }
   });
-  data._schemaVersion=5;
+  data._schemaVersion=6;
   return data;
 }
 function loadLocal(){try{const data=migrateData(JSON.parse(localStorage.getItem(STORAGE_KEY))||structuredClone(DEFAULT_DATA));saveLocal(data);return data}catch{return structuredClone(DEFAULT_DATA)}}

@@ -2,17 +2,17 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#fff6e9">
   <title>Cix Makarna · Yönetim</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
     :root{--accent:#c96545;--gold:#d3a34f;--ink:#3d302a;--cream:#fff6e9;--paper:#fffdf8;--line:#e8d7c5;--muted:#7d6f66;--green:#557b52;--shadow:0 10px 30px #6c493114}
-    *{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:'DM Sans',sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}img{display:block;max-width:100%}
     .login{position:fixed;inset:0;z-index:100;background:linear-gradient(145deg,#f9e7d1,#f4d3bd);display:grid;place-items:center;padding:20px}.login-card{width:min(100%,400px);background:#fffdf9;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 25px 80px #7446322b}.login-mark{width:48px;height:5px;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--gold));margin-bottom:18px}.login h1{font:700 42px/1 'Barlow Condensed';margin:0}.login p{color:var(--muted);font-size:13px}.login input{width:100%;margin:10px 0 12px;padding:14px;border:1px solid var(--line);border-radius:11px;background:#fff}
     .btn{border:1px solid var(--line);background:#f6e5d0;color:var(--ink);font-weight:700;border-radius:10px;padding:10px 14px;transition:.18s}.btn:hover{filter:saturate(1.1);transform:translateY(-1px)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}.btn.green{background:var(--green);border-color:var(--green);color:#fff}.btn.ghost{background:#fff}.btn.danger{background:#fff0ec;color:#a73e2f;border-color:#efc8be}.btn.full{width:100%}
     .layout{display:grid;grid-template-columns:235px 1fr;min-height:100vh}.side{position:sticky;top:0;height:100vh;padding:24px 16px;background:#f1dfca;border-right:1px solid #dfc9b3}.brand{margin:5px 10px 26px}.brand b{display:block;font:700 29px/1 'Barlow Condensed';color:#9b4c38}.brand small{font-size:10px;color:#846f61;letter-spacing:.1em;text-transform:uppercase}.nav{display:flex;align-items:center;width:100%;border:0;background:transparent;color:#705e53;padding:12px 13px;border-radius:11px;font-weight:700;text-align:left;margin:4px 0}.nav.on{background:#fff9f1;color:var(--accent);box-shadow:0 5px 16px #80523413}.nav:last-child{margin-top:20px;border:1px solid #ddc6af}
     .main{min-width:0;padding:28px}.top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:22px}.top h1{font:700 42px/1 'Barlow Condensed';margin:0}.top small{color:var(--muted);font-size:11px}.page{display:none}.page.on{display:block}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.stat{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:var(--shadow);color:var(--muted);font-size:12px}.stat b{display:block;font:700 30px/1 'Barlow Condensed';color:var(--accent);margin-bottom:3px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:16px}.toolbar input,.toolbar select{padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:190px}
+    .edit-mode{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px;padding:14px 16px;border:1px solid var(--line);border-radius:15px;background:var(--paper);box-shadow:var(--shadow)}.edit-mode-copy b{display:block;font-size:13px}.edit-mode-copy small{display:block;margin-top:3px;color:var(--muted);font-size:10px}.edit-mode-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.edit-mode-buttons{display:flex;padding:4px;border:1px solid var(--line);border-radius:11px;background:#f4e5d3}.mode-btn{min-width:92px;border:0;border-radius:8px;padding:9px 12px;background:transparent;color:#715e53;font-size:11px;font-weight:800}.mode-btn.on{background:#fff;color:var(--accent);box-shadow:0 3px 10px #6b42221a}.mode-btn.package.on{background:#a44d36;color:#fff}.active-price-field{padding:10px;border:1px solid #d3aa80;border-radius:11px;background:#fff8ed}.dialog-mode{display:inline-flex;margin:-8px 0 15px;padding:6px 9px;border-radius:999px;background:#f2dfca;color:#7b5141;font-size:10px;font-weight:800}.dialog-mode.package{background:#f2d9d0;color:#934832}
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px}.card{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.card.off img,.card.off .cb{opacity:.45;filter:grayscale(.35)}.card img{width:100%;height:160px;object-fit:cover;background:#f0e4d8;transition:.2s}.cb{padding:14px;transition:.2s}.cb h3{font-size:14px;line-height:1.3;margin:0 0 6px}.cb p{height:34px;overflow:hidden;color:var(--muted);font-size:11px;line-height:1.5}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.price-pair{display:flex;gap:5px;flex-wrap:wrap}.price-chip{display:grid;gap:1px;min-width:62px;padding:5px 7px;border-radius:8px;background:#f7e8d5;color:var(--accent)}.price-chip.package{background:#f2ddd5;color:#934832}.price-chip small{font-size:7px;line-height:1;text-transform:uppercase;letter-spacing:.08em;color:#7b675b}.price-chip b{font:700 18px/1 'Barlow Condensed'}.actions{display:flex;gap:5px}.mini{border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 7px;color:#69584e;font-size:10px;font-weight:700}.mini.danger{color:#a13f31;background:#fff2ef}.visibility-toggle{position:absolute;z-index:4;top:10px;right:10px;display:flex;align-items:center;gap:7px;border:1px solid #d9cabb;border-radius:999px;padding:6px 9px 6px 7px;background:#fffaf4e8;color:#8a554d;font-size:10px;font-weight:800;box-shadow:0 5px 15px #4e31231f;backdrop-filter:blur(8px)}.switch-track{position:relative;width:28px;height:16px;border-radius:999px;background:#c9bcb3;transition:.2s}.switch-track i{position:absolute;top:3px;left:3px;width:10px;height:10px;border-radius:50%;background:#fff;transition:.2s}.visibility-toggle.on{color:#376341;border-color:#b8cbb8}.visibility-toggle.on .switch-track{background:#5c8a62}.visibility-toggle.on .switch-track i{transform:translateX(12px)}
     .panel{max-width:920px;background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:22px;box-shadow:var(--shadow)}.panel h2{font:700 28px 'Barlow Condensed';margin:0 0 16px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:700;color:#68584f}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px;background:#fff;color:var(--ink)}.field textarea{min-height:92px;resize:vertical}.help{font-size:10px;color:var(--muted);line-height:1.45}.checks{display:flex;gap:18px;align-items:center;min-height:44px}.checks label{display:flex;align-items:center;gap:7px}.preview{width:100%;height:190px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#f4e9dd}.preview.logo{object-fit:contain;background:#f8e7ce;padding:14px}.upload-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.file{position:absolute;opacity:0;pointer-events:none}
     .catrow{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);background:#fff;border-radius:11px;margin:8px 0}.catnum{width:31px;height:31px;display:grid;place-items:center;border-radius:8px;background:#f5e4d0;color:var(--accent);font-weight:700}.catrow input{border:0;border-bottom:1px solid transparent;padding:8px;background:transparent;font-weight:700;color:var(--ink);min-width:0}.catrow input:focus{outline:0;border-bottom-color:var(--accent)}
@@ -20,8 +20,8 @@
     .dialog{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:18px;background:#4935289c;backdrop-filter:blur(5px)}.dialog.on{display:grid}.dialog-card{width:min(100%,680px);max-height:93vh;overflow:auto;background:var(--cream);border:1px solid #e2ccb9;border-radius:20px;padding:22px;box-shadow:0 25px 90px #321b1260}.dialog h2{font:700 32px 'Barlow Condensed';margin:0 0 16px}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.toast{position:fixed;right:18px;bottom:18px;z-index:120;display:none;max-width:360px;background:var(--ink);color:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 12px 35px #0003;font-size:12px}.toast.on{display:block}
     .asset-card{padding:13px;border:1px solid var(--line);border-radius:13px;background:#fffaf3}.asset-card h3{font-size:13px;margin:0 0 10px}.section-title{grid-column:1/-1;margin:8px 0 -3px;padding-top:10px;border-top:1px solid var(--line);font:700 21px 'Barlow Condensed';color:#6e5549}
     @media(max-width:900px){.qr-grid{grid-template-columns:1fr 1fr}.qr-card:last-child{grid-column:1/-1}}
-    @media(max-width:780px){.layout{display:block}.side{position:relative;height:auto;display:flex;gap:5px;overflow:auto;padding:9px}.brand{display:none}.nav{width:auto;white-space:nowrap;margin:0}.nav:last-child{margin:0}.main{padding:18px 12px}.top h1{font-size:35px}.stats{grid-template-columns:repeat(3,1fr)}.formgrid{grid-template-columns:1fr}.field.full,.section-title{grid-column:auto}.grid{grid-template-columns:1fr 1fr}.card img{height:135px}.catrow{grid-template-columns:36px 1fr}.catrow .actions{grid-column:2}.top{align-items:flex-start}}
-    @media(max-width:520px){.grid,.qr-grid{grid-template-columns:1fr}.qr-card:last-child{grid-column:auto}.stats{gap:7px}.stat{padding:12px}.toolbar input,.toolbar select{width:100%;min-width:0}.top small{display:block;max-width:240px}.card{display:grid;grid-template-columns:112px 1fr}.card img{height:100%;min-height:145px}.row{align-items:flex-end}.actions{flex-wrap:wrap}.preview{height:165px}}
+    @media(max-width:780px){.layout{display:block}.side{position:relative;height:auto;display:flex;gap:5px;overflow:auto;padding:9px}.brand{display:none}.nav{width:auto;white-space:nowrap;margin:0}.nav:last-child{margin:0}.main{padding:18px 12px}.top h1{font-size:35px}.stats{grid-template-columns:repeat(3,1fr)}.formgrid{grid-template-columns:1fr}.field.full,.section-title{grid-column:auto}.grid{grid-template-columns:1fr 1fr}.card img{height:135px}.catrow{grid-template-columns:36px 1fr}.catrow .actions{grid-column:2}.top{align-items:flex-start}.edit-mode{align-items:flex-start;flex-direction:column}.edit-mode-actions{width:100%}.edit-mode-buttons{flex:1}.mode-btn{min-width:0;flex:1}}
+    @media(max-width:520px){.grid,.qr-grid{grid-template-columns:1fr}.qr-card:last-child{grid-column:auto}.stats{gap:7px}.stat{padding:12px}.toolbar input,.toolbar select{width:100%;min-width:0}.top small{display:block;max-width:240px}.card{display:grid;grid-template-columns:112px 1fr}.card img{height:100%;min-height:145px}.row{align-items:flex-end}.actions{flex-wrap:wrap}.preview{height:165px}.edit-mode-actions>.btn{width:100%}.edit-mode-buttons{width:100%}.dialog-card{padding:18px 14px;border-radius:16px}.dialog-actions{position:sticky;bottom:-18px;padding:12px 0 4px;background:linear-gradient(180deg,transparent,var(--cream) 25%)}}
     @media print{body{background:#fff}.side,.top,.login,.qr>h2,.qr>p,.qr-actions{display:none!important}.layout{display:block}.main{padding:0}.page{display:none!important}#qr{display:block!important}.panel.qr{border:0;box-shadow:none;max-width:none}.qr-grid{grid-template-columns:repeat(3,1fr);gap:8mm}.qr-card{break-inside:avoid;border:1px solid #bbb}.qrbox{width:48mm;padding:3mm}.qrurl{font-size:8pt}}
   </style>
 </head>
@@ -44,7 +44,7 @@
       <button class="nav" data-page="categories">Kategoriler</button>
       <button class="nav" data-page="settings">İşletme ve Tasarım</button>
       <button class="nav" data-page="qr">QR ve Linkler</button>
-      <button class="nav" onclick="window.open('/masa','_blank')">Masa Menüsünü Gör</button>
+      <button class="nav" id="sideSelectedMenu" onclick="openSelectedMenu()">Masa Menüsünü Gör</button>
     </aside>
 
     <main class="main">
@@ -54,6 +54,16 @@
       </div>
 
       <section class="page on" id="products">
+        <div class="edit-mode">
+          <div class="edit-mode-copy"><b>Düzenlenecek fiyat listesi</b><small id="editModeDescription">Ürün kartlarında masa QR fiyatları gösteriliyor.</small></div>
+          <div class="edit-mode-actions">
+            <div class="edit-mode-buttons" role="group" aria-label="Düzenlenecek QR menüsü">
+              <button class="mode-btn" id="editModeTable" type="button" aria-pressed="true" onclick="setAdminMenuMode('table')">Masa QR</button>
+              <button class="mode-btn package" id="editModePackage" type="button" aria-pressed="false" onclick="setAdminMenuMode('package')">Paket QR</button>
+            </div>
+            <button class="btn ghost" id="openSelectedMenu" type="button" onclick="openSelectedMenu()">Masa Menüsünü Aç</button>
+          </div>
+        </div>
         <div class="stats">
           <div class="stat"><b id="statItems">0</b>Ürün</div>
           <div class="stat"><b id="statCats">0</b>Kategori</div>
@@ -98,11 +108,12 @@
   <div class="dialog" id="itemDialog">
     <div class="dialog-card">
       <h2 id="dialogTitle">ÜRÜN</h2>
+      <div class="dialog-mode" id="dialogMode">MASA QR FİYATI DÜZENLENİYOR</div>
       <div class="formgrid">
         <div class="field"><label>Ürün Adı</label><input id="itemName"></div>
         <div class="field"><label>Kategori</label><select id="itemCat"></select></div>
-        <div class="field"><label>Masa Fiyatı</label><input id="itemTablePrice" type="number" min="0" step="1" inputmode="decimal"></div>
-        <div class="field"><label>Paket Fiyatı</label><input id="itemPackagePrice" type="number" min="0" step="1" inputmode="decimal"></div>
+        <div class="field" id="itemTablePriceField"><label>Masa Fiyatı</label><input id="itemTablePrice" type="number" min="0" step="1" inputmode="decimal"></div>
+        <div class="field" id="itemPackagePriceField"><label>Paket Fiyatı</label><input id="itemPackagePrice" type="number" min="0" step="1" inputmode="decimal"></div>
         <div class="field"><label>Paket siparişinde makarna porsiyonu</label><select id="itemPastaPortions"><option value="0">Seçim gösterme</option><option value="1">1 makarna</option><option value="2">2 makarna</option><option value="3">3 makarna</option></select></div>
         <div class="field"><label>Sabit makarna çeşidi</label><select id="itemPastaType"></select></div>
         <div class="field"><label>Görsel dosya yolu</label><input id="itemPath" placeholder="images/urun.jpg"></div>
@@ -124,7 +135,7 @@
   <div class="toast" id="toast"></div>
   <script src="data.js"></script>
   <script>
-    let DATA, editing = null, settingsAssets = {}, qrLinks = {}, adminReady = false, qrLoader;
+    let DATA, editing = null, settingsAssets = {}, qrLinks = {}, adminReady = false, qrLoader, adminMenuMode = sessionStorage.getItem('cix_edit_mode') === 'package' ? 'package' : 'table';
     const $ = id => document.getElementById(id);
     const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const attr = esc;
@@ -135,6 +146,21 @@
       clearTimeout(notify.timer);
       notify.timer = setTimeout(()=>$('toast').classList.remove('on'),2600);
     }
+
+    function renderAdminMenuMode(){
+      const isPackage=adminMenuMode==='package';
+      $('editModeTable').classList.toggle('on',!isPackage);$('editModeTable').setAttribute('aria-pressed',String(!isPackage));
+      $('editModePackage').classList.toggle('on',isPackage);$('editModePackage').setAttribute('aria-pressed',String(isPackage));
+      $('editModeDescription').textContent=isPackage?'Ürün kartlarında paket QR fiyatları gösteriliyor.':'Ürün kartlarında masa QR fiyatları gösteriliyor.';
+      $('openSelectedMenu').textContent=isPackage?'Paket Menüsünü Aç':'Masa Menüsünü Aç';
+      $('sideSelectedMenu').textContent=isPackage?'Paket Menüsünü Gör':'Masa Menüsünü Gör';
+      $('dialogMode').textContent=isPackage?'PAKET QR FİYATI DÜZENLENİYOR':'MASA QR FİYATI DÜZENLENİYOR';$('dialogMode').classList.toggle('package',isPackage);
+      $('itemTablePriceField').classList.toggle('active-price-field',!isPackage);$('itemPackagePriceField').classList.toggle('active-price-field',isPackage);
+    }
+    function setAdminMenuMode(mode){
+      adminMenuMode=mode==='package'?'package':'table';sessionStorage.setItem('cix_edit_mode',adminMenuMode);renderAdminMenuMode();if(DATA)renderGrid();
+    }
+    function openSelectedMenu(){window.open(adminMenuMode==='package'?'/paket':'/masa','_blank','noopener')}
 
     async function doLogin(){
       const password = $('pass').value;
@@ -186,6 +212,7 @@
       $('filter').innerHTML='<option value="">Tüm kategoriler</option>'+DATA.categories.map(c=>`<option value="${attr(c.id)}">${esc(c.name)}</option>`).join('');
       $('filter').value=selected;
       $('itemCat').innerHTML=DATA.categories.map(c=>`<option value="${attr(c.id)}">${esc(c.name)}</option>`).join('');
+      renderAdminMenuMode();
       renderGrid();
       renderCats();
       renderSettings();
@@ -194,7 +221,8 @@
     function renderGrid(){
       const query=$('find').value.toLocaleLowerCase('tr'), category=$('filter').value;
       const items=DATA.items.filter(x=>(!query||`${x.name} ${x.desc}`.toLocaleLowerCase('tr').includes(query))&&(!category||x.cat===category));
-      $('grid').innerHTML=items.map(x=>`<article class="card ${x.hidden?'off':''}"><button class="visibility-toggle ${x.hidden?'':'on'}" onclick="toggleItem('${attr(x.id)}')" aria-pressed="${x.hidden?'false':'true'}" title="Ürünü menüde göster veya gizle"><span class="switch-track"><i></i></span><span>${x.hidden?'Gizli':'Aktif'}</span></button><img src="${attr(x.img)}" alt="${attr(x.name)}" loading="lazy" decoding="async" onerror="this.src='images/cix-hero.jpg'"><div class="cb"><h3>${esc(x.name)}</h3><p>${esc(x.desc)}</p><div class="row"><div class="price-pair"><span class="price-chip"><small>Masa</small><b>${itemPrice(x,'table')} ₺</b></span><span class="price-chip package"><small>Paket</small><b>${itemPrice(x,'package')} ₺</b></span></div><div class="actions"><button class="mini" onclick="openItem('${attr(x.id)}')">Düzenle</button><button class="mini danger" onclick="deleteItem('${attr(x.id)}')">Sil</button></div></div></div></article>`).join('');
+      const label=adminMenuMode==='package'?'Paket QR':'Masa QR';
+      $('grid').innerHTML=items.map(x=>`<article class="card ${x.hidden?'off':''}"><button class="visibility-toggle ${x.hidden?'':'on'}" onclick="toggleItem('${attr(x.id)}')" aria-pressed="${x.hidden?'false':'true'}" title="Ürünü menüde göster veya gizle"><span class="switch-track"><i></i></span><span>${x.hidden?'Gizli':'Aktif'}</span></button><img src="${attr(x.img)}" alt="${attr(x.name)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='images/cix-hero.jpg'"><div class="cb"><h3>${esc(x.name)}</h3><p>${esc(x.desc)}</p><div class="row"><div class="price-pair"><span class="price-chip ${adminMenuMode==='package'?'package':''}"><small>${label}</small><b>${itemPrice(x,adminMenuMode)} ₺</b></span></div><div class="actions"><button class="mini" onclick="openItem('${attr(x.id)}')">Düzenle</button><button class="mini danger" onclick="deleteItem('${attr(x.id)}')">Sil</button></div></div></div></article>`).join('');
     }
 
     function openItem(id){
@@ -207,7 +235,9 @@
       $('itemPreview').src=item.img;$('itemDesc').value=item.desc;$('itemTags').value=(item.tags||[]).join(', ');
       $('itemPopular').checked=!!item.popular;$('itemHidden').checked=!!item.hidden;
       $('itemFile').value='';$('itemFileNote').textContent=String(item.img).startsWith('data:')?'Yüklenmiş görsel kullanılıyor':'JPG, PNG veya WebP';
+      renderAdminMenuMode();
       $('itemDialog').classList.add('on');
+      requestAnimationFrame(()=>$(adminMenuMode==='package'?'itemPackagePrice':'itemTablePrice').focus());
     }
     function closeItem(){$('itemDialog').classList.remove('on')}
 
