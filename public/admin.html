@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#fff6e9">
-  <title>Cix Makarna ? Y?netim</title>
+  <title>Cix Makarna · Yönetim</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
     :root{--accent:#c96545;--gold:#d3a34f;--ink:#3d302a;--cream:#fff6e9;--paper:#fffdf8;--line:#e8d7c5;--muted:#7d6f66;--green:#557b52;--shadow:0 10px 30px #6c493114}
@@ -29,67 +29,67 @@
   <div class="login" id="login">
     <div class="login-card">
       <div class="login-mark"></div>
-      <h1>CIX Y?NET?M</h1>
-      <p>Men?, g?rseller ve i?letme bilgileri</p>
-      <input id="pass" type="password" placeholder="Admin ?ifresi" autocomplete="current-password">
-      <button class="btn primary full" onclick="doLogin()">Giri? Yap</button>
-      <div class="help" id="loginHelp" style="margin-top:10px">Canl? y?netim ?ifrenizi kullan?n.</div>
+      <h1>CIX YÖNETİM</h1>
+      <p>Menü, görseller ve işletme bilgileri</p>
+      <input id="pass" type="password" placeholder="Admin şifresi" autocomplete="current-password">
+      <button class="btn primary full" onclick="doLogin()">Giriş Yap</button>
+      <div class="help" id="loginHelp" style="margin-top:10px">Canlı yönetim şifrenizi kullanın.</div>
     </div>
   </div>
 
   <div class="layout">
     <aside class="side">
-      <div class="brand"><b>CIX Y?NET?M</b><small>QR Men? Kontrol?</small></div>
-      <button class="nav on" data-page="products">?r?nler</button>
+      <div class="brand"><b>CIX YÖNETİM</b><small>QR Menü Kontrolü</small></div>
+      <button class="nav on" data-page="products">Ürünler</button>
       <button class="nav" data-page="categories">Kategoriler</button>
-      <button class="nav" data-page="settings">??letme ve Tasar?m</button>
+      <button class="nav" data-page="settings">İşletme ve Tasarım</button>
       <button class="nav" data-page="qr">QR ve Linkler</button>
-      <button class="nav" onclick="window.open('/masa','_blank')">Masa Men?s?n? G?r</button>
+      <button class="nav" onclick="window.open('/masa','_blank')">Masa Menüsünü Gör</button>
     </aside>
 
     <main class="main">
       <div class="top">
-        <div><h1 id="pageTitle">?R?NLER</h1><small>Yapt???n?z de?i?iklikler men?ye kaydedilir.</small></div>
-        <button class="btn primary" id="addBtn" onclick="openItem()">Yeni ?r?n</button>
+        <div><h1 id="pageTitle">ÜRÜNLER</h1><small>Yaptığınız değişiklikler menüye kaydedilir.</small></div>
+        <button class="btn primary" id="addBtn" onclick="openItem()">Yeni Ürün</button>
       </div>
 
       <section class="page on" id="products">
         <div class="stats">
-          <div class="stat"><b id="statItems">0</b>?r?n</div>
+          <div class="stat"><b id="statItems">0</b>Ürün</div>
           <div class="stat"><b id="statCats">0</b>Kategori</div>
           <div class="stat"><b id="statHidden">0</b>Gizli</div>
         </div>
-        <div class="toolbar"><input id="find" placeholder="?r?n ara..."><select id="filter"></select></div>
+        <div class="toolbar"><input id="find" placeholder="Ürün ara..."><select id="filter"></select></div>
         <div class="grid" id="grid"></div>
       </section>
 
       <section class="page" id="categories">
         <div class="panel">
-          <h2>KATEGOR?LER</h2>
-          <p class="help">Kategori ad?n? do?rudan kutudan de?i?tirebilir, s?ras?n? d?zenleyebilirsiniz.</p>
+          <h2>KATEGORİLER</h2>
+          <p class="help">Kategori adını doğrudan kutudan değiştirebilir, sırasını düzenleyebilirsiniz.</p>
           <div id="catList"></div>
-          <div class="toolbar" style="margin-top:16px"><input id="newCat" placeholder="Yeni kategori ad?"><button class="btn primary" onclick="addCategory()">Kategori Ekle</button></div>
+          <div class="toolbar" style="margin-top:16px"><input id="newCat" placeholder="Yeni kategori adı"><button class="btn primary" onclick="addCategory()">Kategori Ekle</button></div>
         </div>
       </section>
 
       <section class="page" id="settings">
         <div class="panel">
-          <h2>??LETME VE TASARIM</h2>
+          <h2>İŞLETME VE TASARIM</h2>
           <div class="formgrid" id="settingsForm"></div>
-          <button class="btn primary" style="margin-top:18px" onclick="saveSettings()">T?m De?i?iklikleri Kaydet</button>
+          <button class="btn primary" style="margin-top:18px" onclick="saveSettings()">Tüm Değişiklikleri Kaydet</button>
         </div>
       </section>
 
       <section class="page" id="qr">
         <div class="panel qr">
-          <h2>QR KODLAR VE BA?LANTILAR</h2>
-          <p class="help">?? ba?lant? da ayn? Cloudflare Pages sitesi i?inde ?al???r. Y?netim QR kodu ?ifre i?ermez; g?venli giri? ekran?n? a?ar.</p>
+          <h2>QR KODLAR VE BAĞLANTILAR</h2>
+          <p class="help">Üç bağlantı da aynı Cloudflare Pages sitesi içinde çalışır. Yönetim QR kodu şifre içermez; güvenli giriş ekranını açar.</p>
           <div class="qr-grid">
-            <article class="qr-card"><h3>Masa Men?s?</h3><p class="help">Masalarda kullan?lacak fiyat listesi.</p><div class="qrbox" id="qrTableBox"></div><div class="qrurl" id="qrTableUrl"></div><div class="qr-actions"><button class="btn" onclick="downloadQR('table')">PNG ?ndir</button><button class="btn ghost" onclick="openQR('table')">Linki A?</button></div></article>
-            <article class="qr-card"><h3>Paket Men?s?</h3><p class="help">Paketlerin i?ine konacak fiyat listesi.</p><div class="qrbox" id="qrPackageBox"></div><div class="qrurl" id="qrPackageUrl"></div><div class="qr-actions"><button class="btn" onclick="downloadQR('package')">PNG ?ndir</button><button class="btn ghost" onclick="openQR('package')">Linki A?</button></div></article>
-            <article class="qr-card"><h3>Y?netim Paneli</h3><p class="help">Yaln?zca i?letme kullan?m? i?in.</p><div class="qrbox" id="qrAdminBox"></div><div class="qrurl" id="qrAdminUrl"></div><div class="qr-actions"><button class="btn" onclick="downloadQR('admin')">PNG ?ndir</button><button class="btn ghost" onclick="openQR('admin')">Linki A?</button></div></article>
+            <article class="qr-card"><h3>Masa Menüsü</h3><p class="help">Masalarda kullanılacak fiyat listesi.</p><div class="qrbox" id="qrTableBox"></div><div class="qrurl" id="qrTableUrl"></div><div class="qr-actions"><button class="btn" onclick="downloadQR('table')">PNG İndir</button><button class="btn ghost" onclick="openQR('table')">Linki Aç</button></div></article>
+            <article class="qr-card"><h3>Paket Menüsü</h3><p class="help">Paketlerin içine konacak fiyat listesi.</p><div class="qrbox" id="qrPackageBox"></div><div class="qrurl" id="qrPackageUrl"></div><div class="qr-actions"><button class="btn" onclick="downloadQR('package')">PNG İndir</button><button class="btn ghost" onclick="openQR('package')">Linki Aç</button></div></article>
+            <article class="qr-card"><h3>Yönetim Paneli</h3><p class="help">Yalnızca işletme kullanımı için.</p><div class="qrbox" id="qrAdminBox"></div><div class="qrurl" id="qrAdminUrl"></div><div class="qr-actions"><button class="btn" onclick="downloadQR('admin')">PNG İndir</button><button class="btn ghost" onclick="openQR('admin')">Linki Aç</button></div></article>
           </div>
-          <div style="margin-top:18px"><button class="btn primary" onclick="printQR()">???n? Yazd?r</button></div>
+          <div style="margin-top:18px"><button class="btn primary" onclick="printQR()">Üçünü Yazdır</button></div>
         </div>
       </section>
     </main>
@@ -97,27 +97,27 @@
 
   <div class="dialog" id="itemDialog">
     <div class="dialog-card">
-      <h2 id="dialogTitle">?R?N</h2>
+      <h2 id="dialogTitle">ÜRÜN</h2>
       <div class="formgrid">
-        <div class="field"><label>?r?n Ad?</label><input id="itemName"></div>
+        <div class="field"><label>Ürün Adı</label><input id="itemName"></div>
         <div class="field"><label>Kategori</label><select id="itemCat"></select></div>
-        <div class="field"><label>Masa Fiyat?</label><input id="itemTablePrice" type="number" min="0" step="1" inputmode="decimal"></div>
-        <div class="field"><label>Paket Fiyat?</label><input id="itemPackagePrice" type="number" min="0" step="1" inputmode="decimal"></div>
-        <div class="field"><label>Paket sipari?inde makarna porsiyonu</label><select id="itemPastaPortions"><option value="0">Se?im g?sterme</option><option value="1">1 makarna</option><option value="2">2 makarna</option><option value="3">3 makarna</option></select></div>
-        <div class="field"><label>Sabit makarna ?e?idi</label><select id="itemPastaType"></select></div>
-        <div class="field"><label>G?rsel dosya yolu</label><input id="itemPath" placeholder="images/urun.jpg"></div>
+        <div class="field"><label>Masa Fiyatı</label><input id="itemTablePrice" type="number" min="0" step="1" inputmode="decimal"></div>
+        <div class="field"><label>Paket Fiyatı</label><input id="itemPackagePrice" type="number" min="0" step="1" inputmode="decimal"></div>
+        <div class="field"><label>Paket siparişinde makarna porsiyonu</label><select id="itemPastaPortions"><option value="0">Seçim gösterme</option><option value="1">1 makarna</option><option value="2">2 makarna</option><option value="3">3 makarna</option></select></div>
+        <div class="field"><label>Sabit makarna çeşidi</label><select id="itemPastaType"></select></div>
+        <div class="field"><label>Görsel dosya yolu</label><input id="itemPath" placeholder="images/urun.jpg"></div>
         <div class="field full asset-card">
-          <h3>?r?n G?rseli</h3>
-          <img class="preview" id="itemPreview" alt="?r?n g?rseli ?nizleme">
+          <h3>Ürün Görseli</h3>
+          <img class="preview" id="itemPreview" alt="Ürün görseli önizleme">
           <input type="hidden" id="itemImg">
           <input class="file" id="itemFile" type="file" accept="image/jpeg,image/png,image/webp">
-          <div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('itemFile').click()">Bilgisayardan G?rsel Se?</button><span class="help" id="itemFileNote">JPG, PNG veya WebP</span></div>
+          <div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('itemFile').click()">Bilgisayardan Görsel Seç</button><span class="help" id="itemFileNote">JPG, PNG veya WebP</span></div>
         </div>
-        <div class="field full"><label>A??klama</label><textarea id="itemDesc"></textarea></div>
-        <div class="field"><label>Etiketler (virg?lle ay?r?n)</label><input id="itemTags"></div>
-        <div class="field checks"><label><input id="itemPopular" type="checkbox"> Pop?ler ?r?n</label><label><input id="itemHidden" type="checkbox"> ?r?n? gizle</label></div>
+        <div class="field full"><label>Açıklama</label><textarea id="itemDesc"></textarea></div>
+        <div class="field"><label>Etiketler (virgülle ayırın)</label><input id="itemTags"></div>
+        <div class="field checks"><label><input id="itemPopular" type="checkbox"> Popüler ürün</label><label><input id="itemHidden" type="checkbox"> Ürünü gizle</label></div>
       </div>
-      <div class="dialog-actions"><button class="btn ghost" onclick="closeItem()">Vazge?</button><button class="btn primary" onclick="saveItem()">Kaydet</button></div>
+      <div class="dialog-actions"><button class="btn ghost" onclick="closeItem()">Vazgeç</button><button class="btn primary" onclick="saveItem()">Kaydet</button></div>
     </div>
   </div>
 
@@ -140,7 +140,7 @@
       const password = $('pass').value;
       const local = location.protocol === 'file:' || ['localhost','127.0.0.1'].includes(location.hostname);
       if(local){
-        if(password !== '0000') return notify('?ifre hatal?');
+        if(password !== '0000') return notify('Şifre hatalı');
         sessionStorage.setItem('cix_pass',password);
         await initializeAdmin();
         $('login').style.display='none';
@@ -148,12 +148,12 @@
       }
       try{
         const response = await fetch('/api/menu?verify=1',{method:'POST',headers:{'X-Admin-Password':password}});
-        if(!response.ok) return notify('?ifre hatal?');
+        if(!response.ok) return notify('Şifre hatalı');
         const result = await response.json();
         sessionStorage.setItem('cix_pass',password);
         await initializeAdmin(result.menu);
         $('login').style.display='none';
-      }catch{ notify('Sunucuya ula??lamad?'); }
+      }catch{ notify('Sunucuya ulaşılamadı'); }
     }
 
     async function initializeAdmin(menu){
@@ -166,13 +166,13 @@
 
     async function persist(message='Kaydedildi'){
       try{ saveLocal(DATA); }
-      catch{ return notify('G?rseller taray?c? depolama alan?n? a?t?. Daha k???k dosya deneyin.'); }
+      catch{ return notify('Görseller tarayıcı depolama alanını aştı. Daha küçük dosya deneyin.'); }
       if(location.protocol.startsWith('http') && !['localhost','127.0.0.1'].includes(location.hostname)){
         try{
           const response = await fetch('/api/menu',{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Password':sessionStorage.getItem('cix_pass')||''},body:JSON.stringify(DATA)});
           if(!response.ok) throw new Error();
-          message += ' ve yay?na al?nd?';
-        }catch{ message += ' (yaln?zca bu cihazda)'; }
+          message += ' ve yayına alındı';
+        }catch{ message += ' (yalnızca bu cihazda)'; }
       }
       renderAll();
       notify(message);
@@ -183,7 +183,7 @@
       $('statCats').textContent=DATA.categories.length;
       $('statHidden').textContent=DATA.items.filter(x=>x.hidden).length;
       const selected=$('filter').value;
-      $('filter').innerHTML='<option value="">T?m kategoriler</option>'+DATA.categories.map(c=>`<option value="${attr(c.id)}">${esc(c.name)}</option>`).join('');
+      $('filter').innerHTML='<option value="">Tüm kategoriler</option>'+DATA.categories.map(c=>`<option value="${attr(c.id)}">${esc(c.name)}</option>`).join('');
       $('filter').value=selected;
       $('itemCat').innerHTML=DATA.categories.map(c=>`<option value="${attr(c.id)}">${esc(c.name)}</option>`).join('');
       renderGrid();
@@ -194,64 +194,64 @@
     function renderGrid(){
       const query=$('find').value.toLocaleLowerCase('tr'), category=$('filter').value;
       const items=DATA.items.filter(x=>(!query||`${x.name} ${x.desc}`.toLocaleLowerCase('tr').includes(query))&&(!category||x.cat===category));
-      $('grid').innerHTML=items.map(x=>`<article class="card ${x.hidden?'off':''}"><button class="visibility-toggle ${x.hidden?'':'on'}" onclick="toggleItem('${attr(x.id)}')" aria-pressed="${x.hidden?'false':'true'}" title="?r?n? men?de g?ster veya gizle"><span class="switch-track"><i></i></span><span>${x.hidden?'Gizli':'Aktif'}</span></button><img src="${attr(x.img)}" alt="${attr(x.name)}" loading="lazy" decoding="async" onerror="this.src='images/cix-hero.jpg'"><div class="cb"><h3>${esc(x.name)}</h3><p>${esc(x.desc)}</p><div class="row"><div class="price-pair"><span class="price-chip"><small>Masa</small><b>${itemPrice(x,'table')} ?</b></span><span class="price-chip package"><small>Paket</small><b>${itemPrice(x,'package')} ?</b></span></div><div class="actions"><button class="mini" onclick="openItem('${attr(x.id)}')">D?zenle</button><button class="mini danger" onclick="deleteItem('${attr(x.id)}')">Sil</button></div></div></div></article>`).join('');
+      $('grid').innerHTML=items.map(x=>`<article class="card ${x.hidden?'off':''}"><button class="visibility-toggle ${x.hidden?'':'on'}" onclick="toggleItem('${attr(x.id)}')" aria-pressed="${x.hidden?'false':'true'}" title="Ürünü menüde göster veya gizle"><span class="switch-track"><i></i></span><span>${x.hidden?'Gizli':'Aktif'}</span></button><img src="${attr(x.img)}" alt="${attr(x.name)}" loading="lazy" decoding="async" onerror="this.src='images/cix-hero.jpg'"><div class="cb"><h3>${esc(x.name)}</h3><p>${esc(x.desc)}</p><div class="row"><div class="price-pair"><span class="price-chip"><small>Masa</small><b>${itemPrice(x,'table')} ₺</b></span><span class="price-chip package"><small>Paket</small><b>${itemPrice(x,'package')} ₺</b></span></div><div class="actions"><button class="mini" onclick="openItem('${attr(x.id)}')">Düzenle</button><button class="mini danger" onclick="deleteItem('${attr(x.id)}')">Sil</button></div></div></div></article>`).join('');
     }
 
     function openItem(id){
       editing=id||null;
       const item=id?ensureItemPrices(DATA.items.find(x=>x.id===id)):{name:'',cat:DATA.categories[0]?.id||'',price:'',prices:{table:'',package:''},img:'images/cix-hero.jpg',desc:'',tags:[],popular:false,hidden:false};
-      $('dialogTitle').textContent=id?'?R?N? D?ZENLE':'YEN? ?R?N';
+      $('dialogTitle').textContent=id?'ÜRÜNÜ DÜZENLE':'YENİ ÜRÜN';
       $('itemName').value=item.name;$('itemCat').value=item.cat;$('itemTablePrice').value=item.prices.table;$('itemPackagePrice').value=item.prices.package;
-      $('itemPastaPortions').value=String(item.pastaOrder?.portions||0);$('itemPastaType').innerHTML='<option value="">M??teri se?sin</option>'+(DATA.restaurant.orderOptions?.pastaTypes||[]).map(type=>`<option value="${attr(type)}">${esc(type)}</option>`).join('');$('itemPastaType').value=item.pastaOrder?.fixedType||'';
+      $('itemPastaPortions').value=String(item.pastaOrder?.portions||0);$('itemPastaType').innerHTML='<option value="">Müşteri seçsin</option>'+(DATA.restaurant.orderOptions?.pastaTypes||[]).map(type=>`<option value="${attr(type)}">${esc(type)}</option>`).join('');$('itemPastaType').value=item.pastaOrder?.fixedType||'';
       $('itemImg').value=item.img;$('itemPath').value=String(item.img).startsWith('data:')?'':item.img;
       $('itemPreview').src=item.img;$('itemDesc').value=item.desc;$('itemTags').value=(item.tags||[]).join(', ');
       $('itemPopular').checked=!!item.popular;$('itemHidden').checked=!!item.hidden;
-      $('itemFile').value='';$('itemFileNote').textContent=String(item.img).startsWith('data:')?'Y?klenmi? g?rsel kullan?l?yor':'JPG, PNG veya WebP';
+      $('itemFile').value='';$('itemFileNote').textContent=String(item.img).startsWith('data:')?'Yüklenmiş görsel kullanılıyor':'JPG, PNG veya WebP';
       $('itemDialog').classList.add('on');
     }
     function closeItem(){$('itemDialog').classList.remove('on')}
 
     function saveItem(){
       const tableValue=$('itemTablePrice').value.trim(),packageValue=$('itemPackagePrice').value.trim(),tablePrice=Number(tableValue),packagePrice=Number(packageValue);
-      if(!$('itemName').value.trim()||tableValue===''||packageValue===''||!Number.isFinite(tablePrice)||tablePrice<0||!Number.isFinite(packagePrice)||packagePrice<0) return notify('?r?n ad?, masa fiyat? ve paket fiyat? gerekli');
+      if(!$('itemName').value.trim()||tableValue===''||packageValue===''||!Number.isFinite(tablePrice)||tablePrice<0||!Number.isFinite(packagePrice)||packagePrice<0) return notify('Ürün adı, masa fiyatı ve paket fiyatı gerekli');
       const image=$('itemImg').value||$('itemPath').value.trim()||'images/cix-hero.jpg';
       const item=editing?DATA.items.find(x=>x.id===editing):{id:'u'+Date.now()};
       Object.assign(item,{name:$('itemName').value.trim(),cat:$('itemCat').value,price:tablePrice,prices:{table:tablePrice,package:packagePrice},img:image,desc:$('itemDesc').value.trim(),tags:$('itemTags').value.split(',').map(x=>x.trim()).filter(Boolean),popular:$('itemPopular').checked,hidden:$('itemHidden').checked});
       item.pastaOrder={portions:Number($('itemPastaPortions').value)||0,fixedType:$('itemPastaType').value};
       if(!editing) DATA.items.push(item);
-      closeItem();persist('?r?n kaydedildi');
+      closeItem();persist('Ürün kaydedildi');
     }
-    function toggleItem(id){const item=DATA.items.find(x=>x.id===id);item.hidden=!item.hidden;persist(item.hidden?'?r?n gizlendi':'?r?n g?sterildi')}
-    function deleteItem(id){if(confirm('Bu ?r?n silinsin mi?')){DATA.items=DATA.items.filter(x=>x.id!==id);persist('?r?n silindi')}}
+    function toggleItem(id){const item=DATA.items.find(x=>x.id===id);item.hidden=!item.hidden;persist(item.hidden?'Ürün gizlendi':'Ürün gösterildi')}
+    function deleteItem(id){if(confirm('Bu ürün silinsin mi?')){DATA.items=DATA.items.filter(x=>x.id!==id);persist('Ürün silindi')}}
 
     function renderCats(){
-      $('catList').innerHTML=DATA.categories.map((c,i)=>`<div class="catrow"><span class="catnum">${i+1}</span><input value="${attr(c.name)}" onchange="renameCategory('${attr(c.id)}',this.value)"><div class="actions"><button class="mini" onclick="moveCategory(${i},-1)">Yukar?</button><button class="mini" onclick="moveCategory(${i},1)">A?a??</button><button class="mini danger" onclick="deleteCategory('${attr(c.id)}')">Sil</button></div></div>`).join('');
+      $('catList').innerHTML=DATA.categories.map((c,i)=>`<div class="catrow"><span class="catnum">${i+1}</span><input value="${attr(c.name)}" onchange="renameCategory('${attr(c.id)}',this.value)"><div class="actions"><button class="mini" onclick="moveCategory(${i},-1)">Yukarı</button><button class="mini" onclick="moveCategory(${i},1)">Aşağı</button><button class="mini danger" onclick="deleteCategory('${attr(c.id)}')">Sil</button></div></div>`).join('');
     }
-    function renameCategory(id,name){const category=DATA.categories.find(c=>c.id===id);if(name.trim()){category.name=name.trim();persist('Kategori ad? de?i?ti')}}
-    function moveCategory(index,direction){const target=index+direction;if(target<0||target>=DATA.categories.length)return;[DATA.categories[index],DATA.categories[target]]=[DATA.categories[target],DATA.categories[index]];persist('Kategori s?ras? de?i?ti')}
+    function renameCategory(id,name){const category=DATA.categories.find(c=>c.id===id);if(name.trim()){category.name=name.trim();persist('Kategori adı değişti')}}
+    function moveCategory(index,direction){const target=index+direction;if(target<0||target>=DATA.categories.length)return;[DATA.categories[index],DATA.categories[target]]=[DATA.categories[target],DATA.categories[index]];persist('Kategori sırası değişti')}
     function addCategory(){const name=$('newCat').value.trim();if(!name)return;DATA.categories.push({id:'k'+Date.now(),name});$('newCat').value='';persist('Kategori eklendi')}
-    function deleteCategory(id){if(DATA.items.some(x=>x.cat===id))return notify('?nce bu kategorideki ?r?nleri ta??y?n veya silin');if(confirm('Kategori silinsin mi?')){DATA.categories=DATA.categories.filter(x=>x.id!==id);persist('Kategori silindi')}}
+    function deleteCategory(id){if(DATA.items.some(x=>x.cat===id))return notify('Önce bu kategorideki ürünleri taşıyın veya silin');if(confirm('Kategori silinsin mi?')){DATA.categories=DATA.categories.filter(x=>x.id!==id);persist('Kategori silindi')}}
 
     const settingFields=[
-      ['name','??letme ad?'],['tagline','Slogan'],['phone','Telefon ve WhatsApp numaras?'],['instagram','Instagram URL'],['reviewLink','Google yorum URL'],['maps','Harita URL'],['address','Adres','full'],['hours','?al??ma saatleri'],['currency','Para birimi']
+      ['name','İşletme adı'],['tagline','Slogan'],['phone','Telefon ve WhatsApp numarası'],['instagram','Instagram URL'],['reviewLink','Google yorum URL'],['maps','Harita URL'],['address','Adres','full'],['hours','Çalışma saatleri'],['currency','Para birimi']
     ];
-    const colorFields=[['primary','Ana vurgu'],['secondary','Alt?n vurgu'],['ink','Metin'],['cream','Arka plan'],['card','Kartlar'],['green','WhatsApp'],['footer','Alt bilgi']];
+    const colorFields=[['primary','Ana vurgu'],['secondary','Altın vurgu'],['ink','Metin'],['cream','Arka plan'],['card','Kartlar'],['green','WhatsApp'],['footer','Alt bilgi']];
 
     function renderSettings(){
-      const r=DATA.restaurant;r.theme=r.theme||{};r.promises=r.promises||['Lezzetli','S?cak','Doyurucu'];
+      const r=DATA.restaurant;r.theme=r.theme||{};r.promises=r.promises||['Lezzetli','Sıcak','Doyurucu'];
       settingsAssets={cover:r.cover,logo:r.logo||'images/cix-logo-brosur.webp'};
       $('settingsForm').innerHTML=`
-        <div class="section-title">??letme Bilgileri</div>
+        <div class="section-title">İşletme Bilgileri</div>
         ${settingFields.map(([key,label,size])=>`<div class="field ${size||''}"><label>${label}</label><input data-setting="${key}" value="${attr(r[key])}"></div>`).join('')}
-        <div class="section-title">Logo Alt? Mesajlar?</div>
+        <div class="section-title">Logo Altı Mesajları</div>
         ${r.promises.map((value,i)=>`<div class="field"><label>${i+1}. ifade</label><input data-promise="${i}" value="${attr(value)}"></div>`).join('')}
-        <div class="section-title">Paket Sipari?i Makarna Se?enekleri</div>
-        <div class="field full"><label>Makarna ?e?itleri (her sat?ra bir se?enek)</label><textarea id="orderPastaTypes">${esc((r.orderOptions?.pastaTypes||[]).join('\n'))}</textarea></div>
-        <div class="field full"><label>Ana soslar (her sat?ra bir se?enek)</label><textarea id="orderSauces">${esc((r.orderOptions?.sauces||[]).join('\n'))}</textarea></div>
-        <div class="field full"><label>?st malzemeler (her sat?ra bir se?enek)</label><textarea id="orderToppings">${esc((r.orderOptions?.toppings||[]).join('\n'))}</textarea></div>
-        <div class="section-title">G?rseller</div>
-        <div class="field asset-card"><h3>Kapak Arka Plan?</h3><img class="preview" id="coverPreview" src="${attr(r.cover)}" alt="Kapak ?nizleme"><input class="file" id="coverFile" type="file" accept="image/jpeg,image/png,image/webp"><div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('coverFile').click()">Kapak G?rseli Se?</button></div><label>Dosya yolu</label><input id="coverPath" value="${String(r.cover).startsWith('data:')?'':attr(r.cover)}" placeholder="images/cix-hero.jpg"></div>
-        <div class="field asset-card"><h3>Men? Logosu</h3><img class="preview logo" id="logoPreview" src="${attr(r.logo||'images/cix-logo-brosur.webp')}" alt="Logo ?nizleme"><input class="file" id="logoFile" type="file" accept="image/jpeg,image/png,image/webp"><div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('logoFile').click()">Logo G?rseli Se?</button></div><label>Dosya yolu</label><input id="logoPath" value="${String(r.logo||'').startsWith('data:')?'':attr(r.logo||'')}" placeholder="images/cix-logo-brosur.webp"></div>
+        <div class="section-title">Paket Siparişi Makarna Seçenekleri</div>
+        <div class="field full"><label>Makarna çeşitleri (her satıra bir seçenek)</label><textarea id="orderPastaTypes">${esc((r.orderOptions?.pastaTypes||[]).join('\n'))}</textarea></div>
+        <div class="field full"><label>Ana soslar (her satıra bir seçenek)</label><textarea id="orderSauces">${esc((r.orderOptions?.sauces||[]).join('\n'))}</textarea></div>
+        <div class="field full"><label>Üst malzemeler (her satıra bir seçenek)</label><textarea id="orderToppings">${esc((r.orderOptions?.toppings||[]).join('\n'))}</textarea></div>
+        <div class="section-title">Görseller</div>
+        <div class="field asset-card"><h3>Kapak Arka Planı</h3><img class="preview" id="coverPreview" src="${attr(r.cover)}" alt="Kapak önizleme"><input class="file" id="coverFile" type="file" accept="image/jpeg,image/png,image/webp"><div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('coverFile').click()">Kapak Görseli Seç</button></div><label>Dosya yolu</label><input id="coverPath" value="${String(r.cover).startsWith('data:')?'':attr(r.cover)}" placeholder="images/cix-hero.jpg"></div>
+        <div class="field asset-card"><h3>Menü Logosu</h3><img class="preview logo" id="logoPreview" src="${attr(r.logo||'images/cix-logo-brosur.webp')}" alt="Logo önizleme"><input class="file" id="logoFile" type="file" accept="image/jpeg,image/png,image/webp"><div class="upload-row" style="margin-top:10px"><button class="btn green" type="button" onclick="document.getElementById('logoFile').click()">Logo Görseli Seç</button></div><label>Dosya yolu</label><input id="logoPath" value="${String(r.logo||'').startsWith('data:')?'':attr(r.logo||'')}" placeholder="images/cix-logo-brosur.webp"></div>
         <div class="section-title">Renkler</div>
         ${colorFields.map(([key,label])=>`<div class="field"><label>${label}</label><input type="color" data-color="${key}" value="${attr(r.theme[key]||colorDefault(key))}"></div>`).join('')}`;
       $('coverFile').onchange=e=>assetFileChanged('cover',e.target.files[0]);
@@ -269,18 +269,18 @@
       DATA.restaurant.orderOptions={pastaTypes:optionLines('orderPastaTypes',DEFAULT_PASTA_OPTIONS.pastaTypes),sauces:optionLines('orderSauces',DEFAULT_PASTA_OPTIONS.sauces),toppings:optionLines('orderToppings',DEFAULT_PASTA_OPTIONS.toppings)};
       document.querySelectorAll('[data-color]').forEach(input=>DATA.restaurant.theme[input.dataset.color]=input.value);
       DATA.restaurant.cover=settingsAssets.cover||'images/cix-hero.jpg';DATA.restaurant.logo=settingsAssets.logo||'images/cix-logo-brosur.webp';
-      persist('??letme ve tasar?m bilgileri kaydedildi');
+      persist('İşletme ve tasarım bilgileri kaydedildi');
     }
 
     function resizeImage(file,maxSize=1100,transparent=false){
       return new Promise((resolve,reject)=>{
-        if(!file) return reject(new Error('Dosya se?ilmedi'));
-        if(!/^image\/(jpeg|png|webp)$/.test(file.type)) return reject(new Error('Desteklenmeyen dosya t?r?'));
+        if(!file) return reject(new Error('Dosya seçilmedi'));
+        if(!/^image\/(jpeg|png|webp)$/.test(file.type)) return reject(new Error('Desteklenmeyen dosya türü'));
         const reader=new FileReader();
-        reader.onerror=()=>reject(new Error('Dosya okunamad?'));
+        reader.onerror=()=>reject(new Error('Dosya okunamadı'));
         reader.onload=()=>{
           const image=new Image();
-          image.onerror=()=>reject(new Error('G?rsel a??lamad?'));
+          image.onerror=()=>reject(new Error('Görsel açılamadı'));
           image.onload=()=>{
             const ratio=Math.min(1,maxSize/Math.max(image.naturalWidth,image.naturalHeight));
             const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(image.naturalWidth*ratio));canvas.height=Math.max(1,Math.round(image.naturalHeight*ratio));
@@ -295,19 +295,19 @@
 
     async function productFileChanged(file){
       if(!file)return;
-      $('itemFileNote').textContent='G?rsel haz?rlan?yor...';
-      try{const data=await resizeImage(file,1100,false);$('itemImg').value=data;$('itemPath').value='';$('itemPreview').src=data;$('itemFileNote').textContent='Yeni g?rsel haz?r: '+file.name;notify('G?rsel haz?rland?, Kaydet d??mesine bas?n');}
-      catch(error){$('itemFileNote').textContent='G?rsel y?klenemedi';notify(error.message)}
+      $('itemFileNote').textContent='Görsel hazırlanıyor...';
+      try{const data=await resizeImage(file,1100,false);$('itemImg').value=data;$('itemPath').value='';$('itemPreview').src=data;$('itemFileNote').textContent='Yeni görsel hazır: '+file.name;notify('Görsel hazırlandı, Kaydet düğmesine basın');}
+      catch(error){$('itemFileNote').textContent='Görsel yüklenemedi';notify(error.message)}
     }
     async function assetFileChanged(kind,file){
       if(!file)return;
-      try{const data=await resizeImage(file,kind==='logo'?900:1400,kind==='logo');settingsAssets[kind]=data;$(kind+'Preview').src=data;$(kind+'Path').value='';notify((kind==='logo'?'Logo':'Kapak')+' haz?rland?, de?i?iklikleri kaydedin');}
+      try{const data=await resizeImage(file,kind==='logo'?900:1400,kind==='logo');settingsAssets[kind]=data;$(kind+'Preview').src=data;$(kind+'Path').value='';notify((kind==='logo'?'Logo':'Kapak')+' hazırlandı, değişiklikleri kaydedin');}
       catch(error){notify(error.message)}
     }
 
     function ensureQRCode(){
       if(window.QRCode)return Promise.resolve();
-      if(!qrLoader)qrLoader=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='qrcode.min.js';script.onload=resolve;script.onerror=()=>reject(new Error('QR arac? y?klenemedi'));document.head.appendChild(script)});
+      if(!qrLoader)qrLoader=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='qrcode.min.js';script.onload=resolve;script.onerror=()=>reject(new Error('QR aracı yüklenemedi'));document.head.appendChild(script)});
       return qrLoader;
     }
     async function drawQR(){
@@ -325,9 +325,9 @@
       button.classList.add('on');$(button.dataset.page).classList.add('on');$('pageTitle').textContent=button.textContent.toLocaleUpperCase('tr');$('addBtn').style.display=button.dataset.page==='products'?'':'none';if(button.dataset.page==='qr')drawQR();
     });
     $('find').oninput=$('filter').onchange=renderGrid;
-    $('loginHelp').textContent=(location.protocol==='file:'||['localhost','127.0.0.1'].includes(location.hostname))?'Yerel ?nizleme ?ifresi: 0000':'Canl? y?netim ?ifrenizi kullan?n.';
+    $('loginHelp').textContent=(location.protocol==='file:'||['localhost','127.0.0.1'].includes(location.hostname))?'Yerel önizleme şifresi: 0000':'Canlı yönetim şifrenizi kullanın.';
     $('pass').onkeydown=e=>{if(e.key==='Enter')doLogin()};
-    $('itemPath').oninput=e=>{if(e.target.value){$('itemImg').value=e.target.value;$('itemPreview').src=e.target.value;$('itemFileNote').textContent='Dosya yolu kullan?l?yor'}};
+    $('itemPath').oninput=e=>{if(e.target.value){$('itemImg').value=e.target.value;$('itemPreview').src=e.target.value;$('itemFileNote').textContent='Dosya yolu kullanılıyor'}};
     $('itemFile').onchange=e=>productFileChanged(e.target.files[0]);
     $('itemDialog').onclick=e=>{if(e.target===$('itemDialog'))closeItem()};
     async function resumeAdmin(){
